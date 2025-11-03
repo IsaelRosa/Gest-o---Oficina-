@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarService Pro - Sistema para Estética Automotiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-car-wash"></i>
+                    <span>CarService Pro</span>
+                </div>
+                <nav class="nav">
+                    <a href="#sistema" class="nav-link">Sistema</a>
+                    <a href="#funcionalidades" class="nav-link">Funcionalidades</a>
+                    <a href="#planos" class="nav-link">Planos</a>
+                    <a href="#contato" class="nav-link">Contato</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn-contato" onclick="showContact()">
+                        <i class="fas fa-phone"></i> Entre em contato
+                    </button>
+                    <button class="btn-entrar" onclick="showLogin()">
+                        <i class="fas fa-sign-in-alt"></i> Entrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Sistema para estética automotiva e lava-rápido simples e completo</h1>
+                    <p>Torne sua vida mais fácil. Mais tempo para seu negócio crescer e seu cliente agradecer. Fechado?</p>
+                    <button class="btn-teste" onclick="showLogin()">
+                        <i class="fas fa-play"></i> Faça um teste grátis
+                    </button>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-img-placeholder">
+                        <i class="fas fa-car-wash"></i>
+                        <p>Profissional realizando<br>serviço automotivo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como começar -->
+    <section class="como-comecar" id="sistema">
+        <div class="container">
+            <h2>Veja como é simples começar a nossa parceria.</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>Sistema Completo</h3>
+                    <p>Dashboard intuitivo para gerenciar toda sua operação</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Acesso Mobile</h3>
+                    <p>Gerencie seu negócio de qualquer lugar, a qualquer hora</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Tempo Real</h3>
+                    <p>Atualizações instantâneas de agendamentos e serviços</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Funcionalidades -->
+    <section class="funcionalidades" id="funcionalidades">
+        <div class="container">
+            <h2>Funcionalidades Principais</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Agendamentos</h3>
+                    <p>Sistema completo de agendamentos com notificações automáticas</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Gestão de Clientes</h3>
+                    <p>Cadastro completo com histórico de serviços e veículos</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>Ordem de Serviço</h3>
+                    <p>OS digital com checklist de avarias e registro fotográfico</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fab fa-whatsapp"></i>
+                    <h3>WhatsApp Business</h3>
+                    <p>Integração para avisos automáticos e marketing pós-venda</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Relatórios Financeiros</h3>
+                    <p>Controle completo de fluxo de caixa e comissões</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-boxes"></i>
+                    <h3>Controle de Estoque</h3>
+                    <p>Gestão de produtos e materiais utilizados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Planos -->
+    <section class="planos-section" id="planos">
+        <div class="container">
+            <h2>Escolha o Plano Ideal</h2>
+            <p class="section-subtitle">Planos flexíveis para oficinas de todos os tamanhos</p>
+            
+            <div class="planos-grid">
+                <div class="plano-card">
+                    <div class="plano-header">
+                        <h3>Básico</h3>
+                        <div class="plano-price">
+                            <span class="currency">R$</span>
+                            <span class="price">89</span>
+                            <span class="period">/mês</span>
+                        </div>
+                        <p class="plano-description">Ideal para oficinas pequenas que estão começando</p>
+                    </div>
+                    <div class="plano-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Gestão de Agendamentos</li>
+                            <li><i class="fas fa-check"></i> Cadastro de Clientes</li>
+                            <li><i class="fas fa-check"></i> Cadastro de Veículos</li>
+                            <li><i class="fas fa-check"></i> Ordens de Serviço Básicas</li>
+                            <li><i class="fas fa-check"></i> Controle Financeiro Simples</li>
+                            <li><i class="fas fa-check"></i> 1 Usuário</li>
+                        </ul>
+                    </div>
+                    <button class="btn-plano" onclick="showLogin()">
+                        <i class="fas fa-rocket"></i> Começar Agora
+                    </button>
+                </div>
+
+                <div class="plano-card featured">
+                    <div class="plano-badge">Mais Popular</div>
+                    <div class="plano-header">
+                        <h3>Profissional</h3>
+                        <div class="plano-price">
+                            <span class="currency">R$</span>
+                            <span class="price">149</span>
+                            <span class="period">/mês</span>
+                        </div>
+                        <p class="plano-description">Perfeito para oficinas estabelecidas</p>
+                    </div>
+                    <div class="plano-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Tudo do Plano Básico</li>
+                            <li><i class="fas fa-check"></i> WhatsApp Integração</li>
+                            <li><i class="fas fa-check"></i> Checklist de Avarias</li>
+                            <li><i class="fas fa-check"></i> Registro Fotográfico</li>
+                            <li><i class="fas fa-check"></i> Controle de Estoque</li>
+                            <li><i class="fas fa-check"></i> Até 3 Usuários</li>
+                        </ul>
+                    </div>
+                    <button class="btn-plano btn-featured" onclick="showLogin()">
+                        <i class="fas fa-star"></i> Mais Escolhido
+                    </button>
+                </div>
+
+                <div class="plano-card">
+                    <div class="plano-header">
+                        <h3>Premium</h3>
+                        <div class="plano-price">
+                            <span class="currency">R$</span>
+                            <span class="price">249</span>
+                            <span class="period">/mês</span>
+                        </div>
+                        <p class="plano-description">Solução completa para crescer</p>
+                    </div>
+                    <div class="plano-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Tudo do Profissional</li>
+                            <li><i class="fas fa-check"></i> Marketing Automático</li>
+                            <li><i class="fas fa-check"></i> Pacotes de Serviços</li>
+                            <li><i class="fas fa-check"></i> Gestão Pós-Pago</li>
+                            <li><i class="fas fa-check"></i> Usuários Ilimitados</li>
+                            <li><i class="fas fa-check"></i> Suporte Premium</li>
+                        </ul>
+                    </div>
+                    <button class="btn-plano" onclick="showLogin()">
+                        <i class="fas fa-crown"></i> Solução Completa
+                    </button>
+                </div>
+            </div>
+
+            <div class="planos-garantia">
+                <div class="garantia-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Teste Grátis por 7 dias</h3>
+                    <p>Experimente todas as funcionalidades sem compromisso. Cancele quando quiser.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato -->
+    <section class="contato-section" id="contato">
+        <div class="container">
+            <h2>Entre em Contato</h2>
+            <p class="section-subtitle">Estamos aqui para ajudar você a transformar sua oficina</p>
+            
+            <div class="contato-content">
+                <div class="contato-info">
+                    <h3>Fale Conosco</h3>
+                    <p>Nossa equipe está pronta para esclarecer suas dúvidas e ajudar você a escolher a melhor solução para sua oficina.</p>
+                    
+                    <div class="contato-items">
+                        <div class="contato-item">
+                            <div class="contato-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="contato-details">
+                                <h4>WhatsApp</h4>
+                                <p>(11) 99999-9999</p>
+                                <a href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre o CarService Pro." target="_blank" class="btn-contato-direto">
+                                    <i class="fab fa-whatsapp"></i> Conversar no WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contato-item">
+                            <div class="contato-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contato-details">
+                                <h4>E-mail</h4>
+                                <p>contato@carservicepro.com.br</p>
+                                <a href="mailto:contato@carservicepro.com.br?subject=Interesse no CarService Pro" class="btn-contato-direto">
+                                    <i class="fas fa-envelope"></i> Enviar E-mail
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contato-item">
+                            <div class="contato-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contato-details">
+                                <h4>Telefone</h4>
+                                <p>(11) 3333-4444</p>
+                                <a href="tel:+551133334444" class="btn-contato-direto">
+                                    <i class="fas fa-phone"></i> Ligar Agora
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contato-item">
+                            <div class="contato-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contato-details">
+                                <h4>Horário de Atendimento</h4>
+                                <p>Segunda à Sexta: 8h às 18h<br>Sábado: 8h às 12h</p>
+                                <span class="status-atendimento online">
+                                    <i class="fas fa-circle"></i> Online agora
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contato-form">
+                    <h3>Solicite uma Demonstração</h3>
+                    <p>Preencha o formulário e entraremos em contato rapidamente</p>
+                    
+                    <form id="contatoForm" class="form-contato">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nome">Nome completo</label>
+                                <input type="text" id="nome" name="nome" required placeholder="Seu nome completo">
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone">Telefone</label>
+                                <input type="tel" id="telefone" name="telefone" required placeholder="(11) 99999-9999">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="empresa">Nome da Oficina</label>
+                                <input type="text" id="empresa" name="empresa" placeholder="Nome da sua oficina">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interesse">Interesse</label>
+                            <select id="interesse" name="interesse" required>
+                                <option value="">Selecione seu interesse</option>
+                                <option value="demonstracao">Solicitar demonstração</option>
+                                <option value="plano-basico">Plano Básico</option>
+                                <option value="plano-profissional">Plano Profissional</option>
+                                <option value="plano-premium">Plano Premium</option>
+                                <option value="duvidas">Esclarecer dúvidas</option>
+                                <option value="suporte">Suporte técnico</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" rows="4" placeholder="Conte-nos mais sobre suas necessidades..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-enviar">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="contato-cta">
+                <div class="cta-card">
+                    <h3>Pronto para começar?</h3>
+                    <p>Faça um teste gratuito por 7 dias e comprove a eficiência do CarService Pro na sua oficina</p>
+                    <button class="btn-teste-gratis" onclick="showLogin()">
+                        <i class="fas fa-rocket"></i> Começar Teste Grátis
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-sign-in-alt"></i> Acesso ao Sistema</h2>
+                <span class="close" onclick="hideLogin()">&times;</span>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-user"></i> Usuário:
+                    </label>
+                    <input type="text" id="username" required placeholder="Digite seu usuário">
+                </div>
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Senha:
+                    </label>
+                    <input type="password" id="password" required placeholder="Digite sua senha">
+                </div>
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Entrar no Sistema
+                </button>
+                <div class="login-demo">
+                    <p>Para demonstração, use:</p>
+                    <small><strong>Usuário:</strong> admin | <strong>Senha:</strong> 123456</small>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Contato -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-phone"></i> Entre em Contato</h2>
+                <span class="close" onclick="hideContact()">&times;</span>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <h3>WhatsApp</h3>
+                        <p>(11) 99999-9999</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h3>E-mail</h3>
+                        <p>contato@carservicepro.com.br</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h3>Horário</h3>
+                        <p>Segunda à Sexta: 8h às 18h</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Float Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/5511999999999" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            <span class="notification-badge">1</span>
+        </a>
+    </div>
+
+    <script src="js/landing.js"></script>
+</body>
+</html>

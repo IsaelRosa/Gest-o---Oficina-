@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarService Pro - Sistema de Gestão</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Verificação de Auth -->
+    <script>
+        // Verificar se está logado antes de carregar a página
+        function checkAuthOnLoad() {
+            const isLoggedIn = localStorage.getItem('carservice_logged_in');
+            const loginTime = localStorage.getItem('carservice_login_time');
+            
+            // Verificar se login expirou (24 horas)
+            if (loginTime && Date.now() - parseInt(loginTime) > 24 * 60 * 60 * 1000) {
+                localStorage.removeItem('carservice_logged_in');
+                localStorage.removeItem('carservice_user');
+                localStorage.removeItem('carservice_login_time');
+            }
+            
+            // Redirecionar para landing se não estiver logado
+            if (!localStorage.getItem('carservice_logged_in')) {
+                window.location.href = 'landing.html';
+                return;
+            }
+        }
+        
+        // Executar verificação
+        checkAuthOnLoad();
+    </script>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1><i class="fas fa-car-wash"></i> CarService Pro</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-page="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </button>
+                <button class="nav-btn" data-page="agendamentos">
+                    <i class="fas fa-calendar-alt"></i> Agendamentos
+                </button>
+                <button class="nav-btn" data-page="ordem-servico">
+                    <i class="fas fa-clipboard-list"></i> OS
+                </button>
+                <button class="nav-btn" data-page="whatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+                <button class="nav-btn" data-page="servicos">
+                    <i class="fas fa-tools"></i> Serviços
+                </button>
+                <button class="nav-btn" data-page="clientes">
+                    <i class="fas fa-users"></i> Clientes
+                </button>
+                <button class="nav-btn" data-page="veiculos">
+                    <i class="fas fa-car-side"></i> Veículos
+                </button>
+                <button class="nav-btn" data-page="financeiro">
+                    <i class="fas fa-chart-line"></i> Financeiro
+                </button>
+                <button class="nav-btn" data-page="estoque">
+                    <i class="fas fa-boxes"></i> Estoque
+                </button>
+                <button class="nav-btn" data-page="planos">
+                    <i class="fas fa-crown"></i> Planos
+                </button>
+            </nav>
+            <div class="header-user">
+                <span class="user-name" id="currentUser">
+                    <i class="fas fa-user"></i> <span id="userName">Usuário</span>
+                </span>
+                <button class="btn-logout" onclick="logout()" title="Sair do Sistema">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div id="page-container"></div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/agendamentos.js"></script>
+    <script src="js/ordem-servico.js"></script>
+    <script src="js/whatsapp.js"></script>
+    <script src="js/servicos.js"></script>
+    <script src="js/clientes.js"></script>
+    <script src="js/veiculos.js"></script>
+    <script src="js/financeiro.js"></script>
+    <script src="js/estoque.js"></script>
+    <script src="js/planos.js"></script>
+    <script src="js/example-data.js"></script>
+    
+    <script>
+        // Função de logout
+        function logout() {
+            if (confirm('Deseja realmente sair do sistema?')) {
+                localStorage.removeItem('carservice_logged_in');
+                localStorage.removeItem('carservice_user');
+                localStorage.removeItem('carservice_login_time');
+                window.location.href = 'landing.html';
+            }
+        }
+        
+        // Carregar nome do usuário
+        document.addEventListener('DOMContentLoaded', function() {
+            const userName = localStorage.getItem('carservice_user');
+            const userNameElement = document.getElementById('userName');
+            
+            if (userName && userNameElement) {
+                userNameElement.textContent = userName.charAt(0).toUpperCase() + userName.slice(1);
+            }
+        });
+    </script>
+</body>
+</html>
