@@ -59,6 +59,8 @@ class Navigation {
             dashboard: this.getDashboardContent(),
             agendamentos: this.getAgendamentosContent(),
             'ordem-servico': this.getOrdemServicoContent(),
+            funcionarios: this.getFuncionariosContent(),
+            despesas: this.getDespesasContent(),
             whatsapp: this.getWhatsAppContent(),
             servicos: this.getServicosContent(),
             clientes: this.getClientesContent(),
@@ -428,6 +430,171 @@ class Navigation {
         `;
     }
 
+    getFuncionariosContent() {
+        return `
+            <div class="page">
+                <h1 class="page-title"><i class="fas fa-users-cog"></i> Gestão de Funcionários</h1>
+                
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <span id="total-funcionarios">0</span> funcionários cadastrados
+                    </div>
+                    <div class="stat-item">
+                        Funcionários ativos: <span id="funcionarios-ativos">0</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center mb-2">
+                    <button class="btn btn-primary" id="novo-funcionario">
+                        <i class="fas fa-plus"></i> Novo Funcionário
+                    </button>
+                    <div class="flex gap-1">
+                        <div class="form-group" style="margin: 0; width: 200px;">
+                            <select id="filtro-status-funcionario" class="form-control">
+                                <option value="">Todos os Status</option>
+                                <option value="ativo">Ativo</option>
+                                <option value="inativo">Inativo</option>
+                                <option value="ferias">Férias</option>
+                                <option value="afastado">Afastado</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin: 0; width: 200px;">
+                            <input type="text" id="buscar-funcionario" placeholder="Buscar funcionários..." class="form-control search-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="table" id="tabela-funcionarios">
+                        <thead>
+                            <tr>
+                                <th>Funcionário</th>
+                                <th>CPF</th>
+                                <th>Telefone</th>
+                                <th>E-mail</th>
+                                <th>Salário</th>
+                                <th>Comissão</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="funcionarios-tbody">
+                            <tr>
+                                <td colspan="8" class="text-center">Carregando funcionários...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `;
+    }
+
+    getDespesasContent() {
+        return `
+            <div class="page">
+                <h1 class="page-title"><i class="fas fa-receipt"></i> Gestão de Despesas</h1>
+                
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="card-icon fas fa-calendar-alt"></i>
+                            <h3 class="card-title">Total do Mês</h3>
+                        </div>
+                        <div class="card-value">R$ 0,00</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="card-icon fas fa-check-circle"></i>
+                            <h3 class="card-title">Já Pagas</h3>
+                        </div>
+                        <div class="card-value">R$ 0,00</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="card-icon fas fa-clock"></i>
+                            <h3 class="card-title">Pendentes</h3>
+                        </div>
+                        <div class="card-value">R$ 0,00</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="card-icon fas fa-exclamation-triangle"></i>
+                            <h3 class="card-title">Vencidas</h3>
+                        </div>
+                        <div class="card-value">R$ 0,00</div>
+                    </div>
+                </div>
+                
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <span id="total-despesas">0</span> despesas cadastradas
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center mb-2">
+                    <div class="flex gap-1">
+                        <button class="btn btn-primary" id="nova-despesa">
+                            <i class="fas fa-plus"></i> Nova Despesa
+                        </button>
+                        <button class="btn btn-secondary" id="gerenciar-tipos-pagamento">
+                            <i class="fas fa-cog"></i> Tipos de Pagamento
+                        </button>
+                    </div>
+                    <div class="flex gap-1">
+                        <div class="form-group" style="margin: 0; width: 150px;">
+                            <select id="filtro-categoria-despesa" class="form-control">
+                                <option value="">Todas as Categorias</option>
+                                <option value="Infraestrutura">Infraestrutura</option>
+                                <option value="Utilities">Utilities</option>
+                                <option value="Funcionários">Funcionários</option>
+                                <option value="Impostos">Impostos</option>
+                                <option value="Equipamentos">Equipamentos</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Materiais">Materiais</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin: 0; width: 120px;">
+                            <select id="filtro-status-despesa" class="form-control">
+                                <option value="">Todos os Status</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="pago">Pago</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin: 0; width: 200px;">
+                            <input type="text" id="buscar-despesa" placeholder="Buscar despesas..." class="form-control search-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="table" id="tabela-despesas">
+                        <thead>
+                            <tr>
+                                <th>Despesa</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                                <th>Vencimento</th>
+                                <th>Pagamento</th>
+                                <th>Funcionário</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="despesas-tbody">
+                            <tr>
+                                <td colspan="8" class="text-center">Carregando despesas...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `;
+    }
+
     getWhatsAppContent() {
         return `
             <div class="page">
@@ -613,6 +780,18 @@ class Navigation {
                     if (window.OrdemServico) {
                         window.OrdemServico.init();
                         console.log('Ordem de Serviço inicializado');
+                    }
+                    break;
+                case 'funcionarios':
+                    if (window.Funcionarios) {
+                        window.Funcionarios.init();
+                        console.log('Funcionários inicializado');
+                    }
+                    break;
+                case 'despesas':
+                    if (window.Despesas) {
+                        window.Despesas.init();
+                        console.log('Despesas inicializado');
                     }
                     break;
                 case 'whatsapp':

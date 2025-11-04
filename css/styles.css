@@ -2276,3 +2276,494 @@ input:checked + .slider:before {
         font-size: 0.9rem;
     }
 }
+
+/* ===== ESTILOS ESPECÍFICOS PARA FUNCIONÁRIOS ===== */
+
+/* Funcionários - Avatar e Info */
+.funcionario-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.funcionario-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2F7DEB, #144272);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.funcionario-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2F7DEB, #144272);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.funcionario-nome {
+    font-weight: 600;
+    color: #091d33;
+    margin-bottom: 0.25rem;
+}
+
+.funcionario-cargo {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Funcionários - Detalhes */
+.funcionario-details {
+    max-width: 100%;
+}
+
+.funcionario-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #D8E6F5;
+}
+
+.funcionario-info-main h4 {
+    font-size: 1.5rem;
+    color: #091d33;
+    margin-bottom: 0.5rem;
+}
+
+.funcionario-info-main .cargo {
+    font-size: 1.1rem;
+    color: #2F7DEB;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.funcionario-info-main .tempo-servico {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.detail-section {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+}
+
+.detail-section.full-width {
+    grid-column: 1 / -1;
+}
+
+.detail-section h5 {
+    color: #091d33;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    border-bottom: 2px solid #2F7DEB;
+    padding-bottom: 0.5rem;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-item .label {
+    font-weight: 600;
+    color: #495057;
+    min-width: 120px;
+}
+
+.detail-item .value {
+    color: #091d33;
+    text-align: right;
+    flex: 1;
+}
+
+.observacoes {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #2F7DEB;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Funcionários - Comissões */
+.comissoes-summary {
+    margin-bottom: 2rem;
+}
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background: linear-gradient(135deg, #2F7DEB, #144272);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(47, 125, 235, 0.3);
+}
+
+.summary-card h5 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.summary-card .value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.comissoes-detalhes h5 {
+    color: #091d33;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.servicos-comissao {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.servico-comissao-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    border-left: 4px solid #2F7DEB;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.servico-comissao-item:last-child {
+    margin-bottom: 0;
+}
+
+.servico-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.servico-info strong {
+    color: #091d33;
+    font-size: 1rem;
+}
+
+.servico-info span {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.servico-valores {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: right;
+}
+
+.servico-valores span:first-child {
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.servico-valores span:last-child {
+    color: #2F7DEB;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+/* Funcionários - Formulário */
+.form-grid {
+    max-width: 900px;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+}
+
+.form-section h4 {
+    color: #091d33;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    border-bottom: 2px solid #2F7DEB;
+    padding-bottom: 0.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-row:last-child {
+    margin-bottom: 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #091d33;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+/* Status específicos para funcionários */
+.status-ativo {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-inativo {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-ferias {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-afastado {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Responsividade para Funcionários */
+@media (max-width: 768px) {
+    .funcionario-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .servico-comissao-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .servico-valores {
+        align-self: stretch;
+        text-align: left;
+    }
+    
+    .detail-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .detail-item .value {
+        text-align: left;
+    }
+}
+
+/* ===== ESTILOS ESPECÍFICOS PARA DESPESAS ===== */
+
+/* Despesas - Info */
+.despesa-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.despesa-categoria {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    align-self: flex-start;
+}
+
+.despesa-categoria.infraestrutura {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.despesa-categoria.utilities {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.despesa-categoria.funcionários {
+    background: #e8f5e8;
+    color: #2e7d32;
+}
+
+.despesa-categoria.impostos {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.despesa-categoria.equipamentos {
+    background: #fce4ec;
+    color: #c2185b;
+}
+
+.despesa-categoria.marketing {
+    background: #f1f8e9;
+    color: #558b2f;
+}
+
+.despesa-categoria.materiais {
+    background: #e0f2f1;
+    color: #00695c;
+}
+
+.despesa-categoria.outros {
+    background: #f5f5f5;
+    color: #424242;
+}
+
+.despesa-descricao {
+    font-weight: 600;
+    color: #091d33;
+    font-size: 0.95rem;
+}
+
+.despesa-fornecedor {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* Despesas - Tipos */
+.despesa-tipo {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.despesa-tipo.fixa {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.despesa-tipo.variavel {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+/* Despesas - Status específicos */
+.status-pago {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-pendente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-vencido {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Despesas - Detalhes */
+.despesa-details {
+    max-width: 100%;
+}
+
+.valor-destaque {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2F7DEB !important;
+}
+
+/* Despesas - Formulário específico */
+.tipos-pagamento-container {
+    max-width: 100%;
+}
+
+.tipos-pagamento-container .table-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Responsividade para Despesas */
+@media (max-width: 768px) {
+    .despesa-info {
+        gap: 0.5rem;
+    }
+    
+    .despesa-categoria {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
+    }
+    
+    .despesa-tipo {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.6rem;
+    }
+}
