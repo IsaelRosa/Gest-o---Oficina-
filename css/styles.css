@@ -95,6 +95,12 @@ body {
     flex-wrap: wrap;
 }
 
+@media (max-width: 768px) {
+    .nav {
+        display: none !important;
+    }
+}
+
 .nav-btn {
     background: rgba(216, 230, 245, 0.1);
     color: white;
@@ -2044,6 +2050,41 @@ input:checked + .slider:before {
 .success-content p {
     color: #404040;
     margin-bottom: 2rem;
+}
+
+/* ========== CORREÇÃO ESPECÍFICA MOBILE ========== */
+@media screen and (max-width: 768px) {
+    /* FORÇAR OCULTAÇÃO DA NAVEGAÇÃO DESKTOP */
+    .header-content .nav,
+    .header-content .header-user,
+    nav.nav,
+    .header-user {
+        display: none !important;
+        visibility: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+    }
+    
+    /* GARANTIR QUE APENAS O HAMBURGER APAREÇA */
+    .mobile-menu-toggle {
+        display: flex !important;
+        visibility: visible !important;
+        position: relative !important;
+        z-index: 9999 !important;
+    }
+    
+    /* LIMPAR HEADER */
+    .header-content {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        width: 100% !important;
+    }
+    
+    .header {
+        overflow: hidden;
+    }
 }
 
 /* ========== RESPONSIVIDADE MOBILE ========== */
