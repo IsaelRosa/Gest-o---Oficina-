@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>CarService Pro - Sistema de Gestão</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,7 +42,16 @@
             <div class="logo">
                 <h1><i class="fas fa-car-wash"></i> CarService Pro</h1>
             </div>
-            <nav class="nav">
+            
+            <!-- Menu Hamburger (Mobile) -->
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <!-- Navigation Desktop -->
+            <nav class="nav desktop-nav">
                 <button class="nav-btn active" data-page="dashboard">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </button>
@@ -74,13 +83,88 @@
                     <i class="fas fa-crown"></i> Planos
                 </button>
             </nav>
-            <div class="header-user">
+            
+            <div class="header-user desktop-user">
                 <span class="user-name" id="currentUser">
                     <i class="fas fa-user"></i> <span id="userName">Usuário</span>
                 </span>
                 <button class="btn-logout" onclick="logout()" title="Sair do Sistema">
                     <i class="fas fa-sign-out-alt"></i>
                 </button>
+            </div>
+        </div>
+        
+        <!-- Menu Mobile Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <div class="mobile-menu">
+                <div class="mobile-menu-header">
+                    <div class="logo">
+                        <h2><i class="fas fa-car-wash"></i> CarService Pro</h2>
+                    </div>
+                    <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="mobile-user-info">
+                    <div class="mobile-user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="mobile-user-details">
+                        <span class="mobile-user-name" id="mobileUserName">Admin</span>
+                        <span class="mobile-user-role">Administrador</span>
+                    </div>
+                </div>
+                
+                <nav class="mobile-nav">
+                    <button class="mobile-nav-btn active" data-page="dashboard" onclick="toggleMobileMenu()">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    <button class="mobile-nav-btn" data-page="agendamentos" onclick="toggleMobileMenu()">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Agendamentos</span>
+                    </button>
+                    <button class="mobile-nav-btn" data-page="ordem-servico" onclick="toggleMobileMenu()">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>OS</span>
+                    </button>
+                    <button class="mobile-nav-btn" data-page="whatsapp" onclick="toggleMobileMenu()">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </button>
+                    <button class="mobile-nav-btn" data-page="servicos" onclick="toggleMobileMenu()">
+                        <i class="fas fa-tools"></i>
+                        <span>Serviços</span>
+                    </button>
+                    <button class="mobile-nav-btn" data-page="clientes" onclick="toggleMobileMenu()">
+                        <i class="fas fa-users"></i>
+                        <span>Clientes</span>
+                    </button>
+                    <button class="mobile-nav-btn" data-page="veiculos" onclick="toggleMobileMenu()">
+                        <i class="fas fa-car-side"></i>
+                        <span>Veículos</span>
+                    </button>
+                    <button class="mobile-nav-btn" data-page="financeiro" onclick="toggleMobileMenu()">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Financeiro</span>
+                    </button>
+                    <button class="mobile-nav-btn" data-page="estoque" onclick="toggleMobileMenu()">
+                        <i class="fas fa-boxes"></i>
+                        <span>Estoque</span>
+                    </button>
+                    <button class="mobile-nav-btn" data-page="planos" onclick="toggleMobileMenu()">
+                        <i class="fas fa-crown"></i>
+                        <span>Planos</span>
+                    </button>
+                </nav>
+                
+                <div class="mobile-menu-footer">
+                    <button class="mobile-logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Sair do Sistema</span>
+                    </button>
+                </div>
             </div>
         </div>
     </header>

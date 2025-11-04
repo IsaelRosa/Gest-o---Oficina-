@@ -1,3 +1,88 @@
+// ========== MENU HAMBURGER MOBILE SISTEMA ==========
+function toggleMobileMenu() {
+    const overlay = document.getElementById('mobileMenuOverlay');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    
+    if (overlay && toggle) {
+        const isActive = overlay.classList.contains('active');
+        
+        if (isActive) {
+            // Fechar menu
+            overlay.classList.remove('active');
+            toggle.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        } else {
+            // Abrir menu
+            overlay.classList.add('active');
+            toggle.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Sincronizar botão ativo no menu mobile
+            syncMobileMenuActive();
+        }
+    }
+}
+
+function syncMobileMenuActive() {
+    const activeDesktop = document.querySelector('.desktop-nav .nav-btn.active');
+    const mobileButtons = document.querySelectorAll('.mobile-nav-btn');
+    
+    // Remover active de todos os botões mobile
+    mobileButtons.forEach(btn => btn.classList.remove('active'));
+    
+    // Adicionar active ao botão correspondente no mobile
+    if (activeDesktop) {
+        const page = activeDesktop.getAttribute('data-page');
+        const activeMobile = document.querySelector(`.mobile-nav-btn[data-page="${page}"]`);
+        if (activeMobile) {
+            activeMobile.classList.add('active');
+        }
+    }
+}
+
+// Fechar menu ao clicar fora
+document.addEventListener('click', function(e) {
+    const overlay = document.getElementById('mobileMenuOverlay');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const menu = document.querySelector('.mobile-menu');
+    
+    if (overlay && overlay.classList.contains('active') && 
+        !menu.contains(e.target) && 
+        !toggle.contains(e.target)) {
+        toggleMobileMenu();
+    }
+});
+
+// Fechar menu ao redimensionar para desktop
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+        const overlay = document.getElementById('mobileMenuOverlay');
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        
+        if (overlay && overlay.classList.contains('active')) {
+            overlay.classList.remove('active');
+            toggle.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    }
+});
+
+// Sincronizar clique nos botões mobile com desktop
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileButtons = document.querySelectorAll('.mobile-nav-btn');
+    
+    mobileButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const page = this.getAttribute('data-page');
+            const desktopBtn = document.querySelector(`.desktop-nav .nav-btn[data-page="${page}"]`);
+            
+            if (desktopBtn) {
+                desktopBtn.click();
+            }
+        });
+    });
+});
+
 // Aplicação Principal
 class App {
     constructor() {
