@@ -105,23 +105,32 @@ window.Funcionarios = {
     },
 
     bindEvents: function() {
-        // Botão novo funcionário
-        const btnNovo = document.getElementById('novo-funcionario');
-        if (btnNovo) {
-            btnNovo.addEventListener('click', () => this.showFormFuncionario());
-        }
+        // Aguardar um pouco para garantir que os elementos estejam no DOM
+        setTimeout(() => {
+            // Botão novo funcionário
+            const btnNovo = document.getElementById('novo-funcionario');
+            if (btnNovo) {
+                console.log('Botão novo funcionário encontrado, adicionando event listener');
+                btnNovo.addEventListener('click', () => {
+                    console.log('Botão novo funcionário clicado!');
+                    this.showFormFuncionario();
+                });
+            } else {
+                console.error('Botão novo-funcionario não encontrado');
+            }
 
-        // Busca
-        const buscarFuncionario = document.getElementById('buscar-funcionario');
-        if (buscarFuncionario) {
-            buscarFuncionario.addEventListener('input', Utils.debounce(() => this.loadFuncionarios(), 300));
-        }
+            // Busca
+            const buscarFuncionario = document.getElementById('buscar-funcionario');
+            if (buscarFuncionario) {
+                buscarFuncionario.addEventListener('input', Utils.debounce(() => this.loadFuncionarios(), 300));
+            }
 
-        // Filtro de status
-        const filtroStatus = document.getElementById('filtro-status-funcionario');
-        if (filtroStatus) {
-            filtroStatus.addEventListener('change', () => this.loadFuncionarios());
-        }
+            // Filtro de status
+            const filtroStatus = document.getElementById('filtro-status-funcionario');
+            if (filtroStatus) {
+                filtroStatus.addEventListener('change', () => this.loadFuncionarios());
+            }
+        }, 500);
     },
 
     loadFuncionarios: function() {
@@ -720,10 +729,3 @@ Utils.formatCPF = function(cpf) {
     if (!cpf) return '';
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 };
-
-// Auto-inicializar quando a página carregar
-document.addEventListener('DOMContentLoaded', function() {
-    if (window.location.hash === '#funcionarios') {
-        setTimeout(() => Funcionarios.init(), 100);
-    }
-});

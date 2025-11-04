@@ -95,10 +95,12 @@ window.Agendamentos = {
         
         const clientes = DataManager.getAll('clientes') || [];
         const servicos = DataManager.getAll('servicos') || [];
+        const funcionarios = DataManager.getAll('funcionarios') || [];
 
         console.log('=== DEBUG AGENDAMENTO ===');
         console.log('Clientes encontrados:', clientes.length, clientes);
         console.log('Serviços encontrados:', servicos.length, servicos);
+        console.log('Funcionários encontrados:', funcionarios.length, funcionarios);
         console.log('========================');
 
         const clientesOptions = clientes.map(c => 
@@ -108,8 +110,12 @@ window.Agendamentos = {
         const servicosOptions = servicos.map(s => {
             const preco = Utils.formatCurrency ? Utils.formatCurrency(s.preco) : `R$ ${s.preco.toFixed(2)}`;
             const tempo = s.tempo ? `(${s.tempo} min)` : '';
-            return `<option value="${s.nome}" ${isEdit && agendamento.servico === s.nome ? 'selected' : ''}>${s.nome} - ${preco} ${tempo}</option>`;
+            return `<option value="${s.nome}" data-id="${s.id}" ${isEdit && agendamento.servico === s.nome ? 'selected' : ''}>${s.nome} - ${preco} ${tempo}</option>`;
         }).join('');
+
+        const funcionariosOptions = funcionarios.filter(f => f.status === 'ativo').map(f => 
+            `<option value="${f.id}" ${isEdit && agendamento.funcionarioId == f.id ? 'selected' : ''}>${f.nome} - ${f.cargo}</option>`
+        ).join('');
 
         console.log('Opções de serviços geradas:', servicosOptions);
 
@@ -139,6 +145,13 @@ window.Agendamentos = {
                     <select id="servico" required class="form-control">
                         <option value="">Selecione um serviço</option>
                         ${servicosOptions}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Funcionário Responsável:</label>
+                    <select id="funcionario" class="form-control">
+                        <option value="">Selecione um funcionário (opcional)</option>
+                        ${funcionariosOptions}
                     </select>
                 </div>
                 ${isEdit ? `
@@ -174,12 +187,18 @@ window.Agendamentos = {
     },
 
     saveAgendamento: function(modal, id = null) {
+        const servicoSelect = document.getElementById('servico');
+        const servicoOption = servicoSelect.options[servicoSelect.selectedIndex];
+        const servicoId = servicoOption ? servicoOption.getAttribute('data-id') : null;
+        
         const data = {
             data: document.getElementById('data').value,
             hora: document.getElementById('hora').value,
             cliente: document.getElementById('cliente').value,
             veiculo: document.getElementById('veiculo').value,
             servico: document.getElementById('servico').value,
+            servicoId: servicoId,
+            funcionarioId: document.getElementById('funcionario').value || null,
             status: document.getElementById('status') ? document.getElementById('status').value : 'agendado'
         };
 

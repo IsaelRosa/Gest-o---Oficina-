@@ -1,25 +1,78 @@
 // ========== MENU HAMBURGER MOBILE SISTEMA ==========
-function toggleMobileMenu() {
-    const overlay = document.getElementById('mobileMenuOverlay');
-    const toggle = document.querySelector('.mobile-menu-toggle');
+window.toggleMobileMenu = function() {
+    console.log('=== TOGGLE MOBILE MENU SIMPLES ===');
     
-    if (overlay && toggle) {
-        const isActive = overlay.classList.contains('active');
+    const overlay = document.getElementById('mobileMenuOverlay');
+    console.log('Overlay encontrado:', overlay);
+    
+    if (overlay) {
+        const isVisible = overlay.style.display === 'block';
+        console.log('Menu visível:', isVisible);
         
-        if (isActive) {
+        if (isVisible) {
             // Fechar menu
+            overlay.style.setProperty('display', 'none', 'important');
+            overlay.style.setProperty('opacity', '0', 'important');
+            overlay.style.setProperty('visibility', 'hidden', 'important');
             overlay.classList.remove('active');
-            toggle.classList.remove('active');
             document.body.style.overflow = 'auto';
+            console.log('Menu fechado');
         } else {
-            // Abrir menu
+            // Abrir menu - forçar TUDO com !important
+            overlay.style.setProperty('display', 'block', 'important');
+            overlay.style.setProperty('opacity', '1', 'important');
+            overlay.style.setProperty('visibility', 'visible', 'important');
+            overlay.style.setProperty('position', 'fixed', 'important');
+            overlay.style.setProperty('top', '0', 'important');
+            overlay.style.setProperty('left', '0', 'important');
+            overlay.style.setProperty('width', '100vw', 'important');
+            overlay.style.setProperty('height', '100vh', 'important');
+            overlay.style.setProperty('z-index', '999999', 'important');
+            overlay.style.setProperty('background', 'rgba(9, 29, 51, 0.98)', 'important');
             overlay.classList.add('active');
-            toggle.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // Sincronizar botão ativo no menu mobile
-            syncMobileMenuActive();
+            // Forçar TODOS os elementos filhos a serem visíveis
+            const allChildren = overlay.querySelectorAll('*');
+            allChildren.forEach(child => {
+                child.style.setProperty('display', 'block', 'important');
+                child.style.setProperty('visibility', 'visible', 'important');
+                child.style.setProperty('opacity', '1', 'important');
+                child.style.setProperty('color', 'white', 'important');
+            });
+            
+            // Forçar estilo do menu interno especificamente
+            const mobileMenu = overlay.querySelector('.mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.style.setProperty('display', 'flex', 'important');
+                mobileMenu.style.setProperty('flex-direction', 'column', 'important');
+                mobileMenu.style.setProperty('width', '100%', 'important');
+                mobileMenu.style.setProperty('height', '100%', 'important');
+                mobileMenu.style.setProperty('padding', '1.5rem', 'important');
+                mobileMenu.style.setProperty('color', 'white', 'important');
+                mobileMenu.style.setProperty('overflow-y', 'auto', 'important');
+            }
+            
+            // Forçar botões mobile específicos
+            const mobileButtons = overlay.querySelectorAll('.mobile-nav-btn');
+            mobileButtons.forEach(btn => {
+                btn.style.setProperty('display', 'flex', 'important');
+                btn.style.setProperty('color', 'white', 'important');
+                btn.style.setProperty('padding', '1rem', 'important');
+                btn.style.setProperty('border', '2px solid rgba(255, 255, 255, 0.1)', 'important');
+                btn.style.setProperty('margin-bottom', '0.5rem', 'important');
+                btn.style.setProperty('background', 'rgba(255, 255, 255, 0.1)', 'important');
+            });
+            
+            console.log('Menu aberto com TODOS os estilos forçados');
+            console.log('Elementos encontrados:', {
+                overlay: !!overlay,
+                mobileMenu: !!mobileMenu,
+                buttonsCount: mobileButtons.length
+            });
         }
+    } else {
+        console.error('Elemento mobileMenuOverlay não encontrado!');
     }
 }
 
@@ -69,17 +122,49 @@ window.addEventListener('resize', function() {
 
 // Sincronizar clique nos botões mobile com desktop
 document.addEventListener('DOMContentLoaded', function() {
-    const mobileButtons = document.querySelectorAll('.mobile-nav-btn');
+    console.log('DOM carregado, inicializando menu mobile...'); // Debug
     
-    mobileButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const page = this.getAttribute('data-page');
-            const desktopBtn = document.querySelector(`.desktop-nav .nav-btn[data-page="${page}"]`);
+    // Usar delegação de eventos para o botão hamburger
+    document.addEventListener('click', function(e) {
+        // Verificar se o clique foi no botão hamburger
+        if (e.target.closest('.mobile-menu-toggle')) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Botão hamburger clicado!'); // Debug
+            toggleMobileMenu();
+            return;
+        }
+        
+        // Verificar se o clique foi no botão de fechar
+        if (e.target.closest('.mobile-menu-close')) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Botão fechar menu clicado!'); // Debug
+            toggleMobileMenu();
+            return;
+        }
+        
+        // Verificar se o clique foi em um botão de navegação mobile
+        const mobileNavBtn = e.target.closest('.mobile-nav-btn');
+        if (mobileNavBtn) {
+            e.preventDefault();
+            e.stopPropagation();
             
-            if (desktopBtn) {
-                desktopBtn.click();
-            }
-        });
+            const page = mobileNavBtn.getAttribute('data-page');
+            console.log('Botão mobile clicado:', page);
+            
+            // Fechar menu primeiro
+            toggleMobileMenu();
+            
+            // Então navegar
+            setTimeout(() => {
+                const desktopBtn = document.querySelector(`.desktop-nav .nav-btn[data-page="${page}"]`);
+                if (desktopBtn) {
+                    desktopBtn.click();
+                }
+            }, 100);
+            return;
+        }
     });
 });
 

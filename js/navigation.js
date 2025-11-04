@@ -61,6 +61,7 @@ class Navigation {
             'ordem-servico': this.getOrdemServicoContent(),
             funcionarios: this.getFuncionariosContent(),
             despesas: this.getDespesasContent(),
+            comissoes: this.getComissoesContent(),
             whatsapp: this.getWhatsAppContent(),
             servicos: this.getServicosContent(),
             clientes: this.getClientesContent(),
@@ -595,6 +596,110 @@ class Navigation {
         `;
     }
 
+    getComissoesContent() {
+        return `
+            <div class="page">
+                <h1 class="page-title"><i class="fas fa-percentage"></i> Sistema de Comissões</h1>
+                
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="card-icon fas fa-calendar-alt"></i>
+                            <h3 class="card-title">Total do Mês</h3>
+                        </div>
+                        <div class="card-value" id="total-comissoes-mes">R$ 0,00</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="card-icon fas fa-clock"></i>
+                            <h3 class="card-title">Pendentes</h3>
+                        </div>
+                        <div class="card-value" id="comissoes-pendentes">R$ 0,00</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="card-icon fas fa-users"></i>
+                            <h3 class="card-title">Funcionários com Comissão</h3>
+                        </div>
+                        <div class="card-value" id="funcionarios-com-comissao">0</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="card-icon fas fa-chart-line"></i>
+                            <h3 class="card-title">Média de Comissão</h3>
+                        </div>
+                        <div class="card-value" id="media-comissao">8.5%</div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center mb-2">
+                    <div class="flex gap-1">
+                        <button class="btn btn-success" id="pagar-comissoes">
+                            <i class="fas fa-money-bill-wave"></i> Pagar Comissões Pendentes
+                        </button>
+                        <button class="btn btn-secondary" id="gerar-relatorio-comissoes">
+                            <i class="fas fa-file-pdf"></i> Gerar Relatório
+                        </button>
+                    </div>
+                    <div class="flex gap-1">
+                        <div class="form-group" style="margin: 0; width: 180px;">
+                            <select id="filtro-mes-comissao" class="form-control">
+                                <option value="">Todos os períodos</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin: 0; width: 200px;">
+                            <select id="filtro-funcionario-comissao" class="form-control">
+                                <option value="">Todos os funcionários</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="table" id="tabela-comissoes">
+                        <thead>
+                            <tr>
+                                <th>Funcionário</th>
+                                <th>Cargo</th>
+                                <th>% Comissão</th>
+                                <th>Serviços</th>
+                                <th>Total Comissão</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comissoes-tbody">
+                            <tr>
+                                <td colspan="7" class="text-center">Carregando comissões...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="help-section">
+                    <h3><i class="fas fa-info-circle"></i> Como funciona o Sistema de Comissões</h3>
+                    <div class="help-content">
+                        <div class="help-item">
+                            <strong>1. Configuração:</strong> Defina o percentual de comissão de cada funcionário no cadastro de funcionários.
+                        </div>
+                        <div class="help-item">
+                            <strong>2. Cálculo:</strong> As comissões são calculadas automaticamente baseadas nos serviços concluídos.
+                        </div>
+                        <div class="help-item">
+                            <strong>3. Pagamento:</strong> Marque as comissões como pagas para controlar os pagamentos realizados.
+                        </div>
+                        <div class="help-item">
+                            <strong>4. Relatórios:</strong> Gere relatórios detalhados para prestação de contas e controle financeiro.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
     getWhatsAppContent() {
         return `
             <div class="page">
@@ -792,6 +897,12 @@ class Navigation {
                     if (window.Despesas) {
                         window.Despesas.init();
                         console.log('Despesas inicializado');
+                    }
+                    break;
+                case 'comissoes':
+                    if (window.Comissoes) {
+                        window.Comissoes.init();
+                        console.log('Comissões inicializado');
                     }
                     break;
                 case 'whatsapp':
