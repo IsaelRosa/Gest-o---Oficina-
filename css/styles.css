@@ -14,6 +14,12 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
+/* Força mobile menu sempre no topo */
+.mobile-menu-overlay {
+    z-index: 999999 !important;
+    position: fixed !important;
+}
+
 /* Header */
 .header {
     background: linear-gradient(135deg, #091d33 0%, #144272 100%);
@@ -254,17 +260,17 @@ body {
 
 .mobile-menu-overlay {
     display: none !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(9, 29, 51, 0.98);
-    backdrop-filter: blur(10px);
-    z-index: 99999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(9, 29, 51, 0.98) !important;
+    backdrop-filter: blur(10px) !important;
+    z-index: 999999 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.3s ease !important;
 }
 
 .mobile-menu-overlay.active {
@@ -274,28 +280,31 @@ body {
 }
 
 .mobile-menu {
-    width: 100%;
-    height: 100%;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    overflow-y: auto;
-    background: transparent;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 1.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    color: white !important;
+    overflow-y: auto !important;
+    background: transparent !important;
+    -webkit-overflow-scrolling: touch !important;
 }
 
 .mobile-menu-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 2rem !important;
+    padding-bottom: 1rem !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    flex-shrink: 0 !important;
 }
 
 .mobile-menu-header h2 {
-    font-size: 1.4rem;
-    color: white;
+    font-size: 1.4rem !important;
+    color: white !important;
+    margin: 0 !important;
 }
 
 .mobile-menu-close {
@@ -340,40 +349,47 @@ body {
 }
 
 .mobile-nav {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    margin-bottom: 2rem !important;
+    padding: 1rem 0 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    max-height: calc(100vh - 200px) !important;
 }
 
 .mobile-nav-btn {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: none;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    text-decoration: none;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    padding: 1.5rem 1.2rem !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 2px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    min-height: 60px !important;
+    touch-action: manipulation !important;
 }
 
 .mobile-nav-btn:hover,
 .mobile-nav-btn.active {
-    background: rgba(47, 125, 235, 0.2);
-    border-color: #2F7DEB;
-    transform: translateX(10px);
+    background: rgba(47, 125, 235, 0.2) !important;
+    border-color: #2F7DEB !important;
+    transform: translateX(10px) !important;
 }
 
 .mobile-nav-btn i {
-    font-size: 1.2rem;
-    color: #2F7DEB;
-    width: 20px;
+    font-size: 1.4rem !important;
+    color: #2F7DEB !important;
+    width: 24px !important;
+    flex-shrink: 0 !important;
 }
 
 .mobile-menu-footer {
