@@ -1,4 +1,54 @@
 // Landing Page JavaScript
+
+// ========== MENU HAMBURGER MOBILE ==========
+function toggleMobileMenu() {
+    const overlay = document.getElementById('mobileMenuOverlay');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    
+    if (overlay && toggle) {
+        const isActive = overlay.classList.contains('active');
+        
+        if (isActive) {
+            // Fechar menu
+            overlay.classList.remove('active');
+            toggle.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        } else {
+            // Abrir menu
+            overlay.classList.add('active');
+            toggle.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+}
+
+// Fechar menu ao clicar fora
+document.addEventListener('click', function(e) {
+    const overlay = document.getElementById('mobileMenuOverlay');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const menu = document.querySelector('.mobile-menu');
+    
+    if (overlay && overlay.classList.contains('active') && 
+        !menu.contains(e.target) && 
+        !toggle.contains(e.target)) {
+        toggleMobileMenu();
+    }
+});
+
+// Fechar menu ao redimensionar para desktop
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+        const overlay = document.getElementById('mobileMenuOverlay');
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        
+        if (overlay && overlay.classList.contains('active')) {
+            overlay.classList.remove('active');
+            toggle.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling para os links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
