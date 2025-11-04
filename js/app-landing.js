@@ -35,14 +35,21 @@ function closeMobileMenu() {
 }
 
 function navigateToPage(page) {
-    console.log('🔄 Navegando para:', page);
+    console.log('🔄 Navegando para página:', page);
     closeMobileMenu();
     
-    // Implementar navegação
-    if (typeof showPage === 'function') {
-        showPage(page);
+    // Usar o sistema de navegação existente
+    if (window.navigation && typeof window.navigation.navigateTo === 'function') {
+        window.navigation.navigateTo(page);
     } else {
-        console.log('Página solicitada:', page);
+        // Fallback: clicar no botão desktop correspondente
+        const desktopBtn = document.querySelector(`.desktop-nav .nav-btn[data-page="${page}"]`);
+        if (desktopBtn) {
+            desktopBtn.click();
+            console.log('✅ Navegação via botão desktop para:', page);
+        } else {
+            console.warn('❌ Página não encontrada:', page);
+        }
     }
 }
 
@@ -103,18 +110,10 @@ document.addEventListener('click', function(e) {
             e.stopPropagation();
             
             const page = mobileNavBtn.getAttribute('data-page');
-            console.log('Botão mobile clicado:', page);
+            console.log('🎯 Botão mobile clicado:', page);
             
-            // Fechar menu primeiro
-            toggleMobileMenu();
-            
-            // Então navegar
-            setTimeout(() => {
-                const desktopBtn = document.querySelector(`.desktop-nav .nav-btn[data-page="${page}"]`);
-                if (desktopBtn) {
-                    desktopBtn.click();
-                }
-            }, 100);
+            // Navegar usando a função navigateToPage
+            navigateToPage(page);
             return;
         }
     }
@@ -140,11 +139,15 @@ class App {
         // Inicializar sistema de navegação
         this.navigation = new Navigation();
         
+        // Tornar navegação globalmente acessível
+        window.navigation = this.navigation;
+        
         // Inicializar outros sistemas
         this.initModal();
         this.initUtils();
         
-        console.log('Aplicação inicializada com sucesso!');
+        console.log('✅ Aplicação inicializada com sucesso!');
+        console.log('✅ Sistema de navegação disponível globalmente');
     }
 
     initModal() {
