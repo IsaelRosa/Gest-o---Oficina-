@@ -399,7 +399,7 @@ h6 { font-size: 14px; font-weight: 600; font-family: 'Lato', sans-serif; }
     padding: 1.2rem 2.5rem;
     border-radius: 18px;
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.4s ease;
     text-transform: uppercase;
@@ -721,7 +721,7 @@ h6 { font-size: 14px; font-weight: 600; font-family: 'Lato', sans-serif; }
 .modal-header h2 {
     margin: 0;
     font-size: 1.4rem;
-    font-weight: 600;
+    font-weight: 700;
     text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     font-family: 'Lato', sans-serif;
 }
@@ -758,7 +758,7 @@ h6 { font-size: 14px; font-weight: 600; font-family: 'Lato', sans-serif; }
 .form-group label {
     display: block;
     margin-bottom: 0.8rem;
-    font-weight: 600;
+    font-weight: 700;
     color: #091d33;
     font-size: 0.95rem;
 }
@@ -773,7 +773,7 @@ h6 { font-size: 14px; font-weight: 600; font-family: 'Lato', sans-serif; }
     background: #ffffff;
     font-family: inherit;
     color: #091d33;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .form-group input::placeholder {
@@ -788,6 +788,7 @@ h6 { font-size: 14px; font-weight: 600; font-family: 'Lato', sans-serif; }
     box-shadow: 0 0 0 3px rgba(47, 125, 235, 0.1);
     transform: translateY(-2px);
     color: #091d33;
+    font-weight: 700;
 }
 
 .btn-login {
@@ -798,7 +799,7 @@ h6 { font-size: 14px; font-weight: 600; font-family: 'Lato', sans-serif; }
     padding: 1.2rem;
     border-radius: 12px;
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     margin-bottom: 1.5rem;
@@ -1789,7 +1790,7 @@ h6 { font-size: 14px; font-weight: 600; font-family: 'Lato', sans-serif; }
     padding: 1.2rem 2.5rem;
     border-radius: 12px;
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     display: inline-flex;
