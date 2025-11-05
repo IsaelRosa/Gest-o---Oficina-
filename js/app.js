@@ -159,18 +159,32 @@ class App {
     }
 
     onDOMReady() {
-        // Inicializar sistema de navegação
-        this.navigation = new Navigation();
+        console.log('🚀 Iniciando sistema...');
         
-        // Tornar navegação globalmente acessível
-        window.navigation = this.navigation;
-        
-        // Inicializar outros sistemas
-        this.initModal();
-        this.initUtils();
-        
-        console.log('✅ Aplicação inicializada com sucesso!');
-        console.log('✅ Sistema de navegação disponível globalmente');
+        try {
+            // Verificar se Navigation existe
+            if (typeof Navigation === 'undefined') {
+                console.error('❌ Classe Navigation não encontrada!');
+                return;
+            }
+            
+            // Inicializar sistema de navegação
+            console.log('📱 Inicializando navegação...');
+            this.navigation = new Navigation();
+            
+            // Tornar navegação globalmente acessível
+            window.navigation = this.navigation;
+            
+            // Inicializar outros sistemas
+            console.log('🔧 Inicializando sistemas auxiliares...');
+            this.initModal();
+            this.initUtils();
+            
+            console.log('✅ Aplicação inicializada com sucesso!');
+            console.log('✅ Sistema de navegação disponível globalmente');
+        } catch (error) {
+            console.error('❌ Erro na inicialização:', error);
+        }
     }
 
     initModal() {
