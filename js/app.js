@@ -1,103 +1,85 @@
-// ========== MENU HAMBURGER MOBILE SISTEMA ==========
-window.toggleMobileMenu = function() {
-    console.log('=== TOGGLE MOBILE MENU SIMPLES ===');
-    
+// ========== MENU HAMBURGER MOBILE (IGUAL LANDING PAGE) ==========
+function toggleMobileMenu() {
     const overlay = document.getElementById('mobileMenuOverlay');
-    console.log('Overlay encontrado:', overlay);
+    const toggle = document.querySelector('.mobile-menu-toggle');
     
-    if (overlay) {
-        const isVisible = overlay.style.display === 'block';
-        console.log('Menu visível:', isVisible);
+    if (overlay && toggle) {
+        const isActive = overlay.classList.contains('active');
         
-        if (isVisible) {
+        if (isActive) {
             // Fechar menu
-            overlay.style.setProperty('display', 'none', 'important');
-            overlay.style.setProperty('opacity', '0', 'important');
-            overlay.style.setProperty('visibility', 'hidden', 'important');
             overlay.classList.remove('active');
+            toggle.classList.remove('active');
             document.body.style.overflow = 'auto';
-            console.log('Menu fechado');
+            console.log('📱 Menu fechado');
         } else {
-            // Abrir menu - forçar TUDO com !important
-            overlay.style.setProperty('display', 'block', 'important');
-            overlay.style.setProperty('opacity', '1', 'important');
-            overlay.style.setProperty('visibility', 'visible', 'important');
-            overlay.style.setProperty('position', 'fixed', 'important');
-            overlay.style.setProperty('top', '0', 'important');
-            overlay.style.setProperty('left', '0', 'important');
-            overlay.style.setProperty('width', '100vw', 'important');
-            overlay.style.setProperty('height', '100vh', 'important');
-            overlay.style.setProperty('z-index', '999999', 'important');
-            overlay.style.setProperty('background', 'rgba(9, 29, 51, 0.98)', 'important');
+            // Abrir menu
             overlay.classList.add('active');
+            toggle.classList.add('active');
             document.body.style.overflow = 'hidden';
-            
-            // Forçar TODOS os elementos filhos a serem visíveis
-            const allChildren = overlay.querySelectorAll('*');
-            allChildren.forEach(child => {
-                child.style.setProperty('display', 'block', 'important');
-                child.style.setProperty('visibility', 'visible', 'important');
-                child.style.setProperty('opacity', '1', 'important');
-                child.style.setProperty('color', 'white', 'important');
-            });
-            
-            // Forçar estilo do menu interno especificamente
-            const mobileMenu = overlay.querySelector('.mobile-menu');
-            if (mobileMenu) {
-                mobileMenu.style.setProperty('display', 'flex', 'important');
-                mobileMenu.style.setProperty('flex-direction', 'column', 'important');
-                mobileMenu.style.setProperty('width', '100%', 'important');
-                mobileMenu.style.setProperty('height', '100%', 'important');
-                mobileMenu.style.setProperty('padding', '1.5rem', 'important');
-                mobileMenu.style.setProperty('color', 'white', 'important');
-                mobileMenu.style.setProperty('overflow-y', 'auto', 'important');
-            }
-            
-            // Forçar botões mobile específicos
-            const mobileButtons = overlay.querySelectorAll('.mobile-nav-btn');
-            mobileButtons.forEach(btn => {
-                btn.style.setProperty('display', 'flex', 'important');
-                btn.style.setProperty('color', 'white', 'important');
-                btn.style.setProperty('padding', '1rem', 'important');
-                btn.style.setProperty('border', '2px solid rgba(255, 255, 255, 0.1)', 'important');
-                btn.style.setProperty('margin-bottom', '0.5rem', 'important');
-                btn.style.setProperty('background', 'rgba(255, 255, 255, 0.1)', 'important');
-            });
-            
-            console.log('Menu aberto com TODOS os estilos forçados');
-            console.log('Elementos encontrados:', {
-                overlay: !!overlay,
-                mobileMenu: !!mobileMenu,
-                buttonsCount: mobileButtons.length
-            });
+            console.log('📱 Menu aberto');
         }
+    }
+}
+
+function closeMobileMenu() {
+    const overlay = document.getElementById('mobileMenuOverlay');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    
+    if (overlay && overlay.classList.contains('active')) {
+        overlay.classList.remove('active');
+        toggle.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        console.log('📱 Menu fechado via função close');
+    }
+}
+
+function navigateToPage(page) {
+    console.log('🔄 Navegando para página:', page);
+    closeMobileMenu();
+    
+    // Usar o sistema de navegação existente
+    if (window.navigation && typeof window.navigation.navigateTo === 'function') {
+        window.navigation.navigateTo(page);
     } else {
-        console.error('Elemento mobileMenuOverlay não encontrado!');
-    }
-}
-
-function syncMobileMenuActive() {
-    const activeDesktop = document.querySelector('.desktop-nav .nav-btn.active');
-    const mobileButtons = document.querySelectorAll('.mobile-nav-btn');
-    
-    // Remover active de todos os botões mobile
-    mobileButtons.forEach(btn => btn.classList.remove('active'));
-    
-    // Adicionar active ao botão correspondente no mobile
-    if (activeDesktop) {
-        const page = activeDesktop.getAttribute('data-page');
-        const activeMobile = document.querySelector(`.mobile-nav-btn[data-page="${page}"]`);
-        if (activeMobile) {
-            activeMobile.classList.add('active');
+        // Fallback: clicar no botão desktop correspondente
+        const desktopBtn = document.querySelector(`.desktop-nav .nav-btn[data-page="${page}"]`);
+        if (desktopBtn) {
+            desktopBtn.click();
+            console.log('✅ Navegação via botão desktop para:', page);
+        } else {
+            console.warn('❌ Página não encontrada:', page);
         }
     }
 }
 
-// Fechar menu ao clicar fora
+// Fechar menu ao clicar fora (igual landing page)
 document.addEventListener('click', function(e) {
     const overlay = document.getElementById('mobileMenuOverlay');
     const toggle = document.querySelector('.mobile-menu-toggle');
     const menu = document.querySelector('.mobile-menu');
+    
+    if (overlay && overlay.classList.contains('active') && 
+        !menu.contains(e.target) && 
+        !toggle.contains(e.target)) {
+        toggleMobileMenu();
+    }
+});
+
+// Fechar menu ao redimensionar para desktop (igual landing page)
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+        const overlay = document.getElementById('mobileMenuOverlay');
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        
+        if (overlay && overlay.classList.contains('active')) {
+            overlay.classList.remove('active');
+            toggle.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            console.log('📱 Menu fechado por redimensionamento');
+        }
+    }
+});
     
     if (overlay && overlay.classList.contains('active') && 
         !menu.contains(e.target) && 
@@ -151,18 +133,10 @@ document.addEventListener('DOMContentLoaded', function() {
             e.stopPropagation();
             
             const page = mobileNavBtn.getAttribute('data-page');
-            console.log('Botão mobile clicado:', page);
+            console.log('🎯 Botão mobile clicado:', page);
             
-            // Fechar menu primeiro
-            toggleMobileMenu();
-            
-            // Então navegar
-            setTimeout(() => {
-                const desktopBtn = document.querySelector(`.desktop-nav .nav-btn[data-page="${page}"]`);
-                if (desktopBtn) {
-                    desktopBtn.click();
-                }
-            }, 100);
+            // Navegar usando a função navigateToPage
+            navigateToPage(page);
             return;
         }
     });
@@ -188,11 +162,15 @@ class App {
         // Inicializar sistema de navegação
         this.navigation = new Navigation();
         
+        // Tornar navegação globalmente acessível
+        window.navigation = this.navigation;
+        
         // Inicializar outros sistemas
         this.initModal();
         this.initUtils();
         
-        console.log('Aplicação inicializada com sucesso!');
+        console.log('✅ Aplicação inicializada com sucesso!');
+        console.log('✅ Sistema de navegação disponível globalmente');
     }
 
     initModal() {
@@ -478,4 +456,9 @@ class App {
 }
 
 // Inicializar aplicação
-new App();
+const app = new App();
+
+// Torna as funções globais para uso em HTML onclick
+window.toggleMobileMenu = toggleMobileMenu;
+window.closeMobileMenu = closeMobileMenu;
+window.navigateToPage = navigateToPage;
