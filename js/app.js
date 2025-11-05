@@ -80,31 +80,10 @@ window.addEventListener('resize', function() {
         }
     }
 });
-    
-    if (overlay && overlay.classList.contains('active') && 
-        !menu.contains(e.target) && 
-        !toggle.contains(e.target)) {
-        toggleMobileMenu();
-    }
-});
 
-// Fechar menu ao redimensionar para desktop
-window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-        const overlay = document.getElementById('mobileMenuOverlay');
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        
-        if (overlay && overlay.classList.contains('active')) {
-            overlay.classList.remove('active');
-            toggle.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    }
-});
-
-// Sincronizar clique nos botões mobile com desktop
+// Event delegation para navegação mobile
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM carregado, inicializando menu mobile...'); // Debug
+    console.log('DOM carregado, inicializando menu mobile...');
     
     // Usar delegação de eventos para o botão hamburger
     document.addEventListener('click', function(e) {
@@ -112,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target.closest('.mobile-menu-toggle')) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Botão hamburger clicado!'); // Debug
+            console.log('Botão hamburger clicado!');
             toggleMobileMenu();
             return;
         }
@@ -121,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target.closest('.mobile-menu-close')) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Botão fechar menu clicado!'); // Debug
+            console.log('Botão fechar menu clicado!');
             toggleMobileMenu();
             return;
         }

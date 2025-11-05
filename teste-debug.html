@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Sistema CarService</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Diagnóstico do Sistema CarService Pro</h1>
+    
+    <div id="test-results"></div>
+    
+    <button onclick="testarSistema()" style="padding: 10px 20px; font-size: 16px; margin: 20px 0;">
+        🧪 Executar Testes
+    </button>
+    
+    <script>
+        function log(message, type = 'info') {
+            const results = document.getElementById('test-results');
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+            console.log(message);
+        }
+        
+        function testarSistema() {
+            document.getElementById('test-results').innerHTML = '';
+            
+            log('🚀 Iniciando diagnóstico do sistema...', 'warning');
+            
+            // Teste 1: Verificar carregamento básico
+            try {
+                log('✅ JavaScript básico funcionando', 'success');
+            } catch(e) {
+                log('❌ Erro no JavaScript básico: ' + e.message, 'error');
+            }
+            
+            // Teste 2: Verificar DOM
+            try {
+                const pageContainer = document.getElementById('page-container');
+                if (pageContainer) {
+                    log('✅ Elemento page-container encontrado', 'success');
+                } else {
+                    log('❌ Elemento page-container NÃO encontrado', 'error');
+                }
+            } catch(e) {
+                log('❌ Erro ao verificar DOM: ' + e.message, 'error');
+            }
+            
+            // Teste 3: Verificar se Navigation existe
+            try {
+                if (typeof Navigation !== 'undefined') {
+                    log('✅ Classe Navigation está disponível', 'success');
+                } else {
+                    log('❌ Classe Navigation NÃO está disponível', 'error');
+                }
+            } catch(e) {
+                log('❌ Erro ao verificar Navigation: ' + e.message, 'error');
+            }
+            
+            // Teste 4: Verificar se App existe
+            try {
+                if (typeof App !== 'undefined') {
+                    log('✅ Classe App está disponível', 'success');
+                } else {
+                    log('❌ Classe App NÃO está disponível', 'error');
+                }
+            } catch(e) {
+                log('❌ Erro ao verificar App: ' + e.message, 'error');
+            }
+            
+            // Teste 5: Verificar navegação global
+            try {
+                if (window.navigation) {
+                    log('✅ Sistema de navegação global está disponível', 'success');
+                } else {
+                    log('❌ Sistema de navegação global NÃO está disponível', 'error');
+                }
+            } catch(e) {
+                log('❌ Erro ao verificar navegação global: ' + e.message, 'error');
+            }
+            
+            // Teste 6: Verificar botões de navegação
+            try {
+                const navButtons = document.querySelectorAll('.nav-btn');
+                if (navButtons.length > 0) {
+                    log(`✅ ${navButtons.length} botões de navegação encontrados`, 'success');
+                } else {
+                    log('❌ Nenhum botão de navegação encontrado', 'error');
+                }
+            } catch(e) {
+                log('❌ Erro ao verificar botões: ' + e.message, 'error');
+            }
+            
+            // Teste 7: Verificar localStorage
+            try {
+                const testKey = 'carservice_test';
+                localStorage.setItem(testKey, 'teste');
+                const testValue = localStorage.getItem(testKey);
+                localStorage.removeItem(testKey);
+                
+                if (testValue === 'teste') {
+                    log('✅ LocalStorage funcionando', 'success');
+                } else {
+                    log('❌ LocalStorage com problemas', 'error');
+                }
+            } catch(e) {
+                log('❌ Erro no localStorage: ' + e.message, 'error');
+            }
+            
+            log('🏁 Diagnóstico concluído!', 'warning');
+        }
+        
+        // Executar teste automaticamente
+        window.addEventListener('load', function() {
+            setTimeout(testarSistema, 1000);
+        });
+    </script>
+</body>
+</html>
