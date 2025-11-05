@@ -17,6 +17,15 @@ function toggleMobileMenu() {
             overlay.classList.add('active');
             toggle.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Forçar z-index máximo
+            overlay.style.setProperty('z-index', '9999999', 'important');
+            overlay.style.setProperty('position', 'fixed', 'important');
+            overlay.style.setProperty('top', '0', 'important');
+            overlay.style.setProperty('left', '0', 'important');
+            overlay.style.setProperty('width', '100vw', 'important');
+            overlay.style.setProperty('height', '100vh', 'important');
+            
             console.log('📱 Menu aberto');
         }
     }

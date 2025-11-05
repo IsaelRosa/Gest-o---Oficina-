@@ -16,8 +16,30 @@ body {
 
 /* Força mobile menu sempre no topo */
 .mobile-menu-overlay {
-    z-index: 999999 !important;
+    z-index: 9999999 !important;
     position: fixed !important;
+}
+
+/* Garante que o main content fique atrás do mobile menu */
+@media (max-width: 768px) {
+    .main-content {
+        position: relative !important;
+        z-index: 1 !important;
+    }
+    
+    .header {
+        position: relative !important;
+        z-index: 100 !important;
+    }
+    
+    #mobileMenuOverlay {
+        z-index: 9999999 !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+    }
 }
 
 /* Header */
@@ -266,7 +288,7 @@ body {
     width: 100% !important;
     height: 100vh !important;
     background: #091d33 !important;
-    z-index: 999999 !important;
+    z-index: 9999999 !important;
     animation: slideDown 0.3s ease !important;
 }
 
