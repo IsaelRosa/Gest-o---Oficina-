@@ -13,20 +13,27 @@ function toggleMobileMenu() {
             document.body.style.overflow = 'auto';
             console.log('📱 Menu fechado');
         } else {
-            // Abrir menu
+            // Abrir menu com z-index máximo
             overlay.classList.add('active');
             toggle.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // Forçar z-index máximo
-            overlay.style.setProperty('z-index', '9999999', 'important');
+            // Forçar propriedades com z-index ainda maior
+            overlay.style.setProperty('z-index', '999999999', 'important');
             overlay.style.setProperty('position', 'fixed', 'important');
             overlay.style.setProperty('top', '0', 'important');
             overlay.style.setProperty('left', '0', 'important');
+            overlay.style.setProperty('right', '0', 'important');
+            overlay.style.setProperty('bottom', '0', 'important');
             overlay.style.setProperty('width', '100vw', 'important');
             overlay.style.setProperty('height', '100vh', 'important');
+            overlay.style.setProperty('display', 'block', 'important');
+            overlay.style.setProperty('pointer-events', 'auto', 'important');
+            overlay.style.setProperty('contain', 'none', 'important');
+            overlay.style.setProperty('transform', 'translateZ(0)', 'important');
+            overlay.style.setProperty('isolation', 'isolate', 'important');
             
-            console.log('📱 Menu aberto');
+            console.log('📱 Menu aberto com z-index máximo:', overlay.style.zIndex);
         }
     }
 }
