@@ -3813,3 +3813,281 @@ input:checked + .slider:before {
         justify-content: center;
     }
 }
+
+/* === RESPONSIVIDADE MOBILE MELHORADA === */
+@media (max-width: 768px) {
+    /* Layout de tabela tipo card para mobile */
+    .table thead {
+        display: none;
+    }
+    
+    .table tbody tr {
+        display: block;
+        margin-bottom: 1.2rem;
+        background: white;
+        border-radius: 12px;
+        padding: 1.2rem;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        border: 1px solid #e5e7eb;
+        transition: transform 0.2s ease;
+    }
+    
+    .table tbody tr:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    
+    .table tbody td {
+        display: block;
+        text-align: left !important;
+        padding: 0.6rem 0;
+        border: none;
+        position: relative;
+        padding-left: 40%;
+        min-height: 1.5rem;
+    }
+    
+    .table tbody td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        top: 0.6rem;
+        font-weight: 600;
+        color: #374151;
+        width: 35%;
+        text-align: left;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    /* Primeira célula sem label no mobile */
+    .table tbody td:first-child:before {
+        content: '';
+    }
+    
+    .table tbody td:first-child {
+        padding-left: 0;
+        background: #f8fafc;
+        margin: -1.2rem -1.2rem 0.8rem -1.2rem;
+        padding: 1rem 1.2rem;
+        border-radius: 12px 12px 0 0;
+        font-weight: 600;
+        color: #1e40af;
+    }
+    
+    /* Cells específicas no mobile */
+    .datetime-cell {
+        white-space: normal;
+        line-height: 1.4;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    
+    .datetime-cell .time {
+        font-size: 0.9rem;
+        color: #6b7280;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        margin-top: 0.2rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .actions-cell {
+        padding-left: 0 !important;
+        margin-top: 1rem;
+        border-top: 1px solid #e5e7eb;
+        padding-top: 1rem;
+    }
+    
+    .actions-cell:before {
+        display: none;
+    }
+    
+    .actions-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        justify-content: stretch;
+    }
+    
+    .btn-action {
+        flex: 1;
+        min-width: 80px;
+        padding: 0.7rem 0.5rem;
+        font-size: 0.85rem;
+        border-radius: 8px;
+        white-space: nowrap;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+    }
+    
+    /* Modals responsivos */
+    .modal-content {
+        margin: 1rem;
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+        border-radius: 16px;
+    }
+    
+    .modal-header {
+        padding: 1.5rem 1.5rem 1rem;
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: flex-start;
+    }
+    
+    .modal-body {
+        padding: 1rem 1.5rem 1.5rem;
+        max-height: calc(100vh - 8rem);
+        overflow-y: auto;
+    }
+    
+    /* Formulários no mobile */
+    .form-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .form-group {
+        margin-bottom: 0;
+    }
+    
+    .form-control {
+        padding: 0.9rem;
+        font-size: 1rem;
+        border-radius: 10px;
+    }
+    
+    /* Checklist mobile */
+    .checklist-tabs {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .checklist-tab {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+        border-radius: 10px;
+    }
+    
+    .checklist-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    /* Dashboard mobile melhorado */
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .dashboard-card {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+    
+    .card-metric {
+        font-size: 2rem;
+    }
+    
+    /* Navegação de páginas mobile */
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.4rem;
+    }
+    
+    .pagination button {
+        min-width: 44px;
+        height: 44px;
+        padding: 0;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+    
+    /* Search mobile */
+    .busca-filtros {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    
+    .busca-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .busca-actions .btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+        border-radius: 12px;
+    }
+    
+    /* Toasts mobile */
+    .toast {
+        bottom: 2rem;
+        left: 1rem;
+        right: 1rem;
+        margin: 0;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    
+    /* Cards OS mobile */
+    .os-card {
+        padding: 1.2rem;
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: flex-start;
+        margin-bottom: 1.2rem;
+    }
+    
+    .card-title {
+        font-size: 1.3rem;
+    }
+    
+    .os-info {
+        margin-bottom: 1.5rem;
+    }
+    
+    .info-row {
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #f1f5f9;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .os-actions {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        justify-content: stretch;
+    }
+    
+    .os-actions .btn {
+        flex: 1;
+        min-width: 80px;
+        padding: 0.8rem;
+        border-radius: 10px;
+        font-size: 0.9rem;
+    }
+    
+    /* Grid de OS mobile */
+    #os-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}

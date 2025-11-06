@@ -232,21 +232,21 @@ window.Agendamentos = {
 
         const html = agendamentosPagina.map(agendamento => `
             <tr>
-                <td>
+                <td data-label="Data/Hora">
                     <div class="datetime-cell">
                         <div>${Utils.formatDate(agendamento.data)}</div>
                         <div class="time">${agendamento.hora}</div>
                     </div>
                 </td>
-                <td><strong>${agendamento.cliente}</strong></td>
-                <td>${agendamento.servico}</td>
-                <td>
+                <td data-label="Cliente"><strong>${agendamento.cliente}</strong></td>
+                <td data-label="Serviço">${agendamento.servico}</td>
+                <td data-label="Status">
                     <span class="status-badge ${agendamento.status}">
                         ${this.getStatusText(agendamento.status)}
                     </span>
                 </td>
-                <td class="text-currency">${Utils.formatCurrency(agendamento.valor || 0)}</td>
-                <td class="actions-cell">
+                <td data-label="Valor" class="text-currency">${Utils.formatCurrency(agendamento.valor || 0)}</td>
+                <td data-label="Ações" class="actions-cell">
                     <div class="actions-buttons">
                         <button class="btn-action btn-edit" onclick="Agendamentos.editarAgendamento('${agendamento.id}')" title="Editar">
                             <i class="fas fa-edit"></i>

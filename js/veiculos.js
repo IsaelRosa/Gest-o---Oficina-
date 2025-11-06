@@ -45,21 +45,23 @@ window.Veiculos = {
 
         const html = veiculos.map(veiculo => `
             <tr>
-                <td>${veiculo.marca} ${veiculo.modelo}</td>
-                <td>${veiculo.placa}</td>
-                <td>${veiculo.ano}</td>
-                <td>${veiculo.proprietario}</td>
-                <td>${veiculo.ultimaManutencao ? Utils.formatDate(veiculo.ultimaManutencao) : 'Nunca'}</td>
-                <td>
-                    <button class="btn btn-warning" onclick="Veiculos.editVeiculo(${veiculo.id})" title="Editar">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn" onclick="Veiculos.viewVeiculo(${veiculo.id})" title="Visualizar">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                    <button class="btn btn-danger" onclick="Veiculos.deleteVeiculo(${veiculo.id})" title="Excluir">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                <td data-label="Veículo">${veiculo.marca} ${veiculo.modelo}</td>
+                <td data-label="Placa">${veiculo.placa}</td>
+                <td data-label="Ano">${veiculo.ano}</td>
+                <td data-label="Proprietário">${veiculo.proprietario}</td>
+                <td data-label="Última Manutenção">${veiculo.ultimaManutencao ? Utils.formatDate(veiculo.ultimaManutencao) : 'Nunca'}</td>
+                <td data-label="Ações" class="actions-cell">
+                    <div class="actions-buttons">
+                        <button class="btn btn-warning" onclick="Veiculos.editVeiculo(${veiculo.id})" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn" onclick="Veiculos.viewVeiculo(${veiculo.id})" title="Visualizar">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-danger" onclick="Veiculos.deleteVeiculo(${veiculo.id})" title="Excluir">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </td>
             </tr>
         `).join('');

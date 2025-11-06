@@ -59,21 +59,23 @@ window.Clientes = {
 
         const html = clientes.map(cliente => `
             <tr>
-                <td>${cliente.nome}</td>
-                <td>${cliente.telefone}</td>
-                <td>${cliente.email}</td>
-                <td>${cliente.veiculos || 0}</td>
-                <td>${cliente.ultimaVisita ? Utils.formatDate(cliente.ultimaVisita) : 'Nunca'}</td>
-                <td>
-                    <button class="btn btn-warning" onclick="Clientes.editCliente(${cliente.id})" title="Editar">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn" onclick="Clientes.viewCliente(${cliente.id})" title="Visualizar">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                    <button class="btn btn-danger" onclick="Clientes.deleteCliente(${cliente.id})" title="Excluir">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                <td data-label="Nome">${cliente.nome}</td>
+                <td data-label="Telefone">${cliente.telefone}</td>
+                <td data-label="Email">${cliente.email}</td>
+                <td data-label="Veículos">${cliente.veiculos || 0}</td>
+                <td data-label="Última Visita">${cliente.ultimaVisita ? Utils.formatDate(cliente.ultimaVisita) : 'Nunca'}</td>
+                <td data-label="Ações" class="actions-cell">
+                    <div class="actions-buttons">
+                        <button class="btn btn-warning" onclick="Clientes.editCliente(${cliente.id})" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn" onclick="Clientes.viewCliente(${cliente.id})" title="Visualizar">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-danger" onclick="Clientes.deleteCliente(${cliente.id})" title="Excluir">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </td>
             </tr>
         `).join('');
