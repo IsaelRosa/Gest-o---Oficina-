@@ -153,17 +153,11 @@ const OrdemServico = {
                 <div class="form-row">
                     <div class="form-group">
                         <label>Cliente:</label>
-                        <select id="cliente" required class="form-control">
-                            <option value="">Selecione um cliente</option>
-                            ${clientesOptions}
-                        </select>
+                        <input type="text" id="cliente" required value="${isEdit ? os.cliente : ''}" placeholder="Digite o nome do cliente..." class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Veículo:</label>
-                        <select id="veiculo" required class="form-control">
-                            <option value="">Selecione um veículo</option>
-                            ${veiculosOptions}
-                        </select>
+                        <input type="text" id="veiculo" required value="${isEdit ? os.veiculo : ''}" placeholder="Digite o modelo do veículo..." class="form-control">
                     </div>
                 </div>
 
@@ -365,6 +359,39 @@ const OrdemServico = {
             e.preventDefault();
             this.saveOS(modal, isEdit ? os.id : null);
         });
+
+        // Configurar autocomplete após criar o modal
+        setTimeout(() => {
+            this.setupFormAutocomplete();
+        }, 100);
+    },
+
+    setupFormAutocomplete: function() {
+        // Autocomplete para cliente
+        Autocomplete.createClienteAutocomplete('cliente', {
+            onSelect: (cliente) => {
+                // Atualizar autocomplete de veículos baseado no cliente selecionado
+                Autocomplete.updateVeiculosByCliente('veiculo', cliente.nome);
+            }
+        });
+
+        // Autocomplete para veículo
+        Autocomplete.createVeiculoAutocomplete('veiculo');
+
+        // Listener para mudanças no campo cliente (manual)
+        const clienteInput = document.getElementById('cliente');
+        if (clienteInput) {
+            let timeoutId;
+            clienteInput.addEventListener('input', () => {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    const clienteNome = clienteInput.value.trim();
+                    if (clienteNome) {
+                        Autocomplete.updateVeiculosByCliente('veiculo', clienteNome);
+                    }
+                }, 500);
+            });
+        }
     },
 
     gerarNumeroOS: function() {

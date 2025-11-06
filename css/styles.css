@@ -3255,3 +3255,348 @@ input:checked + .slider:before {
         gap: 1rem;
     }
 }
+
+/* ========== SISTEMA DE BUSCA AGENDAMENTOS ========== */
+.agendamentos-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.busca-container {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.busca-container h2 {
+    color: #091d33;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.busca-form {
+    max-width: 100%;
+}
+
+.filtros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.filtro-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filtro-group label {
+    font-weight: 600;
+    color: #091d33;
+    margin-bottom: 0.5rem;
+}
+
+.filtro-group input,
+.filtro-group select {
+    padding: 0.75rem;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.filtro-group input:focus,
+.filtro-group select:focus {
+    outline: none;
+    border-color: #2F7DEB;
+    box-shadow: 0 0 0 3px rgba(47, 125, 235, 0.1);
+}
+
+.busca-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+}
+
+.busca-actions .btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+}
+
+/* Resultados */
+.resultados-container {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.resultados-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f4f8;
+}
+
+.resultados-header h3 {
+    color: #091d33;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.paginacao-info {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Tabela responsiva melhorada */
+.table-responsive {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+.datetime-cell {
+    white-space: nowrap;
+}
+
+.datetime-cell .time {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.2rem;
+}
+
+.text-currency {
+    font-weight: 600;
+    color: #27ae60;
+}
+
+.actions-cell {
+    white-space: nowrap;
+}
+
+.btn-action {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    margin: 0 0.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn-action.btn-edit {
+    color: #2F7DEB;
+}
+
+.btn-action.btn-edit:hover {
+    background: rgba(47, 125, 235, 0.1);
+}
+
+.btn-action.btn-delete {
+    color: #e74c3c;
+}
+
+.btn-action.btn-delete:hover {
+    background: rgba(231, 76, 60, 0.1);
+}
+
+/* Paginação */
+.paginacao-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.pagination {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-page {
+    background: white;
+    border: 2px solid #e0e6ed;
+    color: #666;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-page:hover {
+    border-color: #2F7DEB;
+    color: #2F7DEB;
+}
+
+.btn-page.active {
+    background: #2F7DEB;
+    border-color: #2F7DEB;
+    color: white;
+}
+
+.btn-page:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Mobile responsivo */
+@media (max-width: 768px) {
+    .agendamentos-container {
+        padding: 1rem;
+    }
+    
+    .busca-container,
+    .resultados-container {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .filtros-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .busca-actions {
+        flex-direction: column;
+    }
+    
+    .busca-actions .btn {
+        width: 100%;
+    }
+    
+    .resultados-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+    
+    .actions-cell {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* ========== AUTOCOMPLETE ========== */
+.autocomplete-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.autocomplete-input {
+    width: 100% !important;
+    padding: 0.75rem !important;
+    border: 2px solid #e0e6ed !important;
+    border-radius: 8px !important;
+    font-size: 1rem !important;
+    transition: border-color 0.3s ease !important;
+}
+
+.autocomplete-input:focus {
+    outline: none !important;
+    border-color: #2F7DEB !important;
+    box-shadow: 0 0 0 3px rgba(47, 125, 235, 0.1) !important;
+}
+
+.autocomplete-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #e0e6ed;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.autocomplete-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f4f8;
+    transition: background-color 0.2s ease;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.active {
+    background-color: #f8f9ff;
+}
+
+.autocomplete-item.active {
+    border-left: 3px solid #2F7DEB;
+}
+
+.autocomplete-main {
+    font-weight: 600;
+    color: #091d33;
+    margin-bottom: 0.2rem;
+}
+
+.autocomplete-main strong {
+    background-color: rgba(47, 125, 235, 0.2);
+    color: #1e5bb8;
+    padding: 0.1rem 0.2rem;
+    border-radius: 3px;
+}
+
+.autocomplete-secondary {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.autocomplete-no-results {
+    padding: 1rem;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* Autocomplete em modals */
+.modal .autocomplete-suggestions {
+    z-index: 10000;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .autocomplete-suggestions {
+        max-height: 200px;
+    }
+    
+    .autocomplete-item {
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .autocomplete-main {
+        font-size: 0.9rem;
+    }
+    
+    .autocomplete-secondary {
+        font-size: 0.8rem;
+    }
+}
