@@ -40,6 +40,21 @@ body {
         width: 100vw !important;
         height: 100vh !important;
     }
+    
+    /* Mobile: volta para layout single-line */
+    .header-content {
+        flex-direction: row;
+    }
+    
+    .header-top-row {
+        justify-content: space-between;
+        width: 100%;
+        padding: 0;
+    }
+    
+    .header-bottom-row {
+        display: none; /* Esconde navegação desktop no mobile */
+    }
 }
 
 /* Header */
@@ -58,9 +73,33 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+}
+
+/* Linha Superior: Logo + User */
+.header-top-row {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+/* Linha Inferior: Navegação */
+.header-bottom-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 1rem;
+}
+
+.header-bottom-row .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    max-width: 100%;
 }
 
 .logo h1 {
@@ -683,31 +722,29 @@ body {
 }
 
 .btn-danger {
-    background: #cf1016;
-    box-shadow: 0 4px 15px rgba(207, 16, 22, 0.3);
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.25);
 }
 
 .btn-danger:hover {
-    box-shadow: 0 8px 25px rgba(207, 16, 22, 0.4);
+    background: linear-gradient(135deg, #d62c1a, #a93226);
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.35);
 }
 
 .btn-warning {
-    background: linear-gradient(135deg, #ffd700, #ffb347);
+    background: linear-gradient(135deg, #f39c12, #e67e22);
     color: #091d33;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.25);
 }
 
 .btn-warning:hover {
-    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    background: linear-gradient(135deg, #e67e22, #d68910);
+    box-shadow: 0 8px 25px rgba(243, 156, 18, 0.35);
 }
 
 .btn-secondary {
     background: linear-gradient(135deg, #718096, #4a5568);
     box-shadow: 0 4px 15px rgba(113, 128, 150, 0.3);
-}
-
-.btn-warning:hover {
-    background: #e67e22;
 }
 
 /* Tabelas */
@@ -3072,5 +3109,149 @@ input:checked + .slider:before {
     
     .help-item {
         padding: 0.75rem;
+    }
+}
+
+/* ========== DASHBOARD FUNCIONÁRIO ========== */
+.dashboard-funcionario {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.dashboard-header h1 {
+    color: #091d33;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Atalhos Rápidos */
+.atalhos-rapidos {
+    margin-bottom: 3rem;
+}
+
+.atalhos-rapidos h2 {
+    color: #091d33;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.atalhos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.atalho-card {
+    background: linear-gradient(135deg, #2F7DEB, #1e5bb8);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(47, 125, 235, 0.3);
+}
+
+.atalho-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(47, 125, 235, 0.4);
+}
+
+.atalho-card i {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.atalho-card span {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* OS e Agendamentos */
+.os-andamento, .agendamentos-proximos {
+    margin-bottom: 3rem;
+}
+
+.os-andamento h2, .agendamentos-proximos h2 {
+    color: #091d33;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.os-item, .agendamento-item {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.os-info h4, .agendamento-info h4 {
+    color: #091d33;
+    margin-bottom: 0.5rem;
+}
+
+.os-info p, .agendamento-info p {
+    margin: 0.3rem 0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.status-badge.aguardando {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-badge.em-andamento {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-badge.finalizada {
+    background: #d4edda;
+    color: #155724;
+}
+
+@media (max-width: 768px) {
+    .dashboard-funcionario {
+        padding: 1rem;
+    }
+    
+    .atalhos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .os-item, .agendamento-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
     }
 }

@@ -120,20 +120,37 @@ function handleLogin(event) {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     
-    // Validação simples para demonstração
+    // Sistema de login com roles
+    let userRole = null;
+    let userName = '';
+    
     if ((username === 'admin' && password === '123456') || 
-        (username === 'demo' && password === 'demo') ||
-        (username === 'teste' && password === 'teste')) {
-        
+        (username === 'gerente' && password === 'gerente')) {
+        userRole = 'gerente';
+        userName = username === 'admin' ? 'Administrador' : 'Gerente';
+    } else if ((username === 'funcionario' && password === 'funcionario') ||
+               (username === 'atendente' && password === 'atendente')) {
+        userRole = 'funcionario';
+        userName = username === 'funcionario' ? 'Funcionário' : 'Atendente';
+    } else if (username === 'demo' && password === 'demo') {
+        userRole = 'gerente';
+        userName = 'Demo (Gerente)';
+    } else if (username === 'teste' && password === 'teste') {
+        userRole = 'funcionario';
+        userName = 'Demo (Funcionário)';
+    }
+    
+    if (userRole) {
         // Simular loading
         const button = event.target.querySelector('button[type="submit"]');
         const originalText = button.innerHTML;
         button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Entrando...';
         button.disabled = true;
         
-        // Salvar estado de login
+        // Salvar estado de login com role
         localStorage.setItem('carservice_logged_in', 'true');
-        localStorage.setItem('carservice_user', username);
+        localStorage.setItem('carservice_user', userName);
+        localStorage.setItem('carservice_user_role', userRole);
         localStorage.setItem('carservice_login_time', Date.now());
         
         setTimeout(() => {
@@ -143,7 +160,7 @@ function handleLogin(event) {
         
     } else {
         // Erro de login
-        showLoginError('Usuário ou senha incorretos. Tente: admin/123456');
+        showLoginError('Usuário ou senha incorretos.<br>Gerente: admin/123456 ou gerente/gerente<br>Funcionário: funcionario/funcionario');
     }
 }
 
