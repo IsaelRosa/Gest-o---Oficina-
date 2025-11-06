@@ -151,6 +151,7 @@ function handleLogin(event) {
         localStorage.setItem('carservice_logged_in', 'true');
         localStorage.setItem('carservice_user', userName);
         localStorage.setItem('carservice_user_role', userRole);
+        localStorage.setItem('userRole', userRole); // Para compatibilidade com sistema de permissões
         localStorage.setItem('carservice_login_time', Date.now());
         
         setTimeout(() => {

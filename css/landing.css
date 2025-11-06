@@ -780,8 +780,16 @@ h6 { font-size: 14px; font-weight: 600; font-family: 'Lato', sans-serif; }
     transition: all 0.3s ease;
     background: #ffffff;
     font-family: inherit;
-    color: #091d33;
+    color: #091d33 !important;
     font-weight: 600;
+}
+
+/* Garantir que campos de senha mostrem o texto */
+.form-group input[type="password"] {
+    color: #091d33 !important;
+    font-family: inherit !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1em;
 }
 
 .form-group input::placeholder {
@@ -795,7 +803,7 @@ h6 { font-size: 14px; font-weight: 600; font-family: 'Lato', sans-serif; }
     background: white;
     box-shadow: 0 0 0 3px rgba(47, 125, 235, 0.1);
     transform: translateY(-2px);
-    color: #091d33;
+    color: #091d33 !important;
     font-weight: 700;
 }
 

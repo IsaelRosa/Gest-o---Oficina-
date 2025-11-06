@@ -170,6 +170,11 @@ class App {
             // Tornar navegação globalmente acessível
             window.navigation = this.navigation;
             
+            // Atualizar permissões baseadas no role do usuário logado
+            const userRole = localStorage.getItem('carservice_user_role') || 'funcionario';
+            this.navigation.updateUserRole(userRole);
+            console.log('🔐 Permissões aplicadas para role:', userRole);
+            
             // Inicializar outros sistemas
             console.log('🔧 Inicializando sistemas auxiliares...');
             this.initModal();

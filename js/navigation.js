@@ -4,15 +4,23 @@ class Navigation {
         this.currentPage = 'dashboard';
         this.pageContainer = document.getElementById('page-container');
         this.navButtons = document.querySelectorAll('.nav-btn');
+        this.userRole = localStorage.getItem('userRole') || 'funcionario';
         this.init();
     }
 
     init() {
+        // Aplicar permissões na navegação
+        this.applyPermissions();
+        
         // Adicionar event listeners aos botões de navegação
         this.navButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const page = e.target.closest('.nav-btn').dataset.page;
-                this.navigateTo(page);
+                if (this.hasPermission(page)) {
+                    this.navigateTo(page);
+                } else {
+                    Utils.showNotification('Você não tem permissão para acessar esta funcionalidade!', 'error');
+                }
             });
         });
 
@@ -20,12 +28,50 @@ class Navigation {
         this.loadPage(this.currentPage);
     }
 
+    // Sistema de permissões por role
+    hasPermission(page) {
+        const permissions = {
+            gerente: [
+                'dashboard', 'agendamentos', 'ordem-servico', 'funcionarios', 
+                'despesas', 'comissoes', 'whatsapp', 'servicos', 
+                'clientes', 'veiculos', 'financeiro', 'estoque', 'planos'
+            ],
+            funcionario: [
+                'dashboard', 'agendamentos', 'ordem-servico', 'whatsapp', 
+                'servicos', 'clientes', 'veiculos', 'estoque'
+            ]
+        };
+
+        return permissions[this.userRole]?.includes(page) || false;
+    }
+
+    // Aplicar permissões visuais na navegação
+    applyPermissions() {
+        this.navButtons.forEach(btn => {
+            const page = btn.dataset.page;
+            if (!this.hasPermission(page)) {
+                btn.style.display = 'none';
+            } else {
+                btn.style.display = '';
+            }
+        });
+    }
+
     navigateTo(page) {
         if (page === this.currentPage) return;
 
+        // Verificar permissões
+        if (!this.hasPermission(page)) {
+            Utils.showNotification('Você não tem permissão para acessar esta funcionalidade!', 'error');
+            return;
+        }
+
         // Atualizar botão ativo
         this.navButtons.forEach(btn => btn.classList.remove('active'));
-        document.querySelector(`[data-page="${page}"]`).classList.add('active');
+        const targetBtn = document.querySelector(`[data-page="${page}"]`);
+        if (targetBtn) {
+            targetBtn.classList.add('active');
+        }
 
         // Carregar nova página
         this.currentPage = page;
@@ -948,7 +994,20 @@ class Navigation {
             console.error('Erro ao inicializar funcionalidade da página:', error);
         }
     }
+
+    // Método para atualizar permissões quando o role do usuário muda
+    updateUserRole(newRole) {
+        this.userRole = newRole;
+        this.applyPermissions();
+        
+        // Se a página atual não é permitida para o novo role, redirecionar para dashboard
+        if (!this.hasPermission(this.currentPage)) {
+            this.navigateTo('dashboard');
+        }
+    }
 }
 
+// Expor para uso global
+window.Navigation = Navigation;
 // Expor para uso global
 window.Navigation = Navigation;
