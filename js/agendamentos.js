@@ -247,12 +247,23 @@ window.Agendamentos = {
                 </td>
                 <td class="text-currency">${Utils.formatCurrency(agendamento.valor || 0)}</td>
                 <td class="actions-cell">
-                    <button class="btn-action btn-edit" onclick="Agendamentos.editarAgendamento('${agendamento.id}')" title="Editar">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="btn-action btn-delete" onclick="Agendamentos.excluirAgendamento('${agendamento.id}')" title="Excluir">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                    <div class="actions-buttons">
+                        <button class="btn-action btn-edit" onclick="Agendamentos.editarAgendamento('${agendamento.id}')" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        ${!agendamento.convertidoParaOS ? `
+                            <button class="btn-action btn-convert" onclick="Agendamentos.converterParaOS('${agendamento.id}')" title="Converter para OS">
+                                <i class="fas fa-wrench"></i>
+                            </button>
+                        ` : `
+                            <button class="btn-action btn-view-os" onclick="Agendamentos.verOS('${agendamento.osId}')" title="Ver OS">
+                                <i class="fas fa-file-alt"></i>
+                            </button>
+                        `}
+                        <button class="btn-action btn-delete" onclick="Agendamentos.excluirAgendamento('${agendamento.id}')" title="Excluir">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </td>
             </tr>
         `).join('');
@@ -337,7 +348,8 @@ window.Agendamentos = {
             'agendado': 'Agendado',
             'em-andamento': 'Em Andamento',
             'concluido': 'Concluído',
-            'cancelado': 'Cancelado'
+            'cancelado': 'Cancelado',
+            'convertido': 'Convertido para OS'
         };
         return statusMap[status] || status;
     },
@@ -623,6 +635,89 @@ window.Agendamentos = {
     // Aliases para compatibilidade com os botões
     excluirAgendamento: function(id) {
         this.deleteAgendamento(id);
+    },
+
+    // Converter agendamento para Ordem de Serviço
+    converterParaOS: function(id) {
+        const agendamento = DataManager.getById('agendamentos', id);
+        if (!agendamento) {
+            Utils.showNotification('Agendamento não encontrado!', 'error');
+            return;
+        }
+
+        Utils.confirm('Deseja converter este agendamento em uma Ordem de Serviço?', () => {
+            // Criar OS baseada no agendamento
+            const novaOS = {
+                numero: OrdemServico.gerarNumeroOS(),
+                dataAbertura: new Date().toISOString().split('T')[0],
+                cliente: agendamento.cliente,
+                veiculos: [{
+                    veiculo: agendamento.veiculo || 'Veículo não especificado',
+                    placa: '',
+                    cor: '',
+                    ano: '',
+                    km: '',
+                    combustivel: ''
+                }],
+                veiculo: agendamento.veiculo || 'Veículo não especificado', // Compatibilidade
+                observacoes: `Criada a partir do agendamento de ${Utils.formatDate(agendamento.data)} às ${agendamento.hora}`,
+                status: 'Aguardando',
+                servicos: agendamento.servico ? [{
+                    nome: agendamento.servico,
+                    preco: agendamento.valor || 0,
+                    tempo: 60 // Tempo padrão
+                }] : [],
+                checklist: {
+                    avarias: {},
+                    observacoes: '',
+                    fotos: []
+                },
+                agendamentoOrigem: id,
+                criadoEm: new Date().toISOString(),
+                atualizadoEm: new Date().toISOString()
+            };
+
+            // Salvar a nova OS
+            const osId = DataManager.add('ordens-servico', novaOS);
+
+            // Marcar agendamento como convertido
+            DataManager.update('agendamentos', id, {
+                convertidoParaOS: true,
+                osId: osId,
+                status: 'convertido'
+            });
+
+            Utils.showNotification('Agendamento convertido para Ordem de Serviço com sucesso!', 'success');
+            this.executarBusca(); // Atualizar lista
+
+            // Perguntar se quer abrir a OS
+            Utils.confirm('Deseja abrir a Ordem de Serviço criada?', () => {
+                // Navegar para OS
+                Navigation.showPage('ordem-servico');
+                // Dar um tempo para a página carregar
+                setTimeout(() => {
+                    if (window.OrdemServico && window.OrdemServico.editOS) {
+                        window.OrdemServico.editOS(osId);
+                    }
+                }, 500);
+            });
+        });
+    },
+
+    // Ver OS associada
+    verOS: function(osId) {
+        if (!osId) {
+            Utils.showNotification('OS não encontrada!', 'error');
+            return;
+        }
+
+        // Navegar para OS e abrir a visualização
+        Navigation.showPage('ordem-servico');
+        setTimeout(() => {
+            if (window.OrdemServico && window.OrdemServico.viewOS) {
+                window.OrdemServico.viewOS(osId);
+            }
+        }, 500);
     },
 
     editAgendamento: function(id) {

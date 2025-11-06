@@ -155,9 +155,17 @@ const OrdemServico = {
                         <label>Cliente:</label>
                         <input type="text" id="cliente" required value="${isEdit ? os.cliente : ''}" placeholder="Digite o nome do cliente..." class="form-control">
                     </div>
-                    <div class="form-group">
-                        <label>Veículo:</label>
-                        <input type="text" id="veiculo" required value="${isEdit ? os.veiculo : ''}" placeholder="Digite o modelo do veículo..." class="form-control">
+                </div>
+
+                <div class="veiculos-section">
+                    <div class="section-header">
+                        <h4><i class="fas fa-car"></i> Veículos</h4>
+                        <button type="button" class="btn-add-veiculo" onclick="ordemServico.adicionarVeiculo()">
+                            <i class="fas fa-plus"></i> Adicionar Veículo
+                        </button>
+                    </div>
+                    <div id="veiculos-container">
+                        ${this.renderVeiculosEdit(isEdit ? os.veiculos || [os] : [])}
                     </div>
                 </div>
 
@@ -600,11 +608,15 @@ const OrdemServico = {
     },
 
     saveOS: function(modal, id = null) {
+        const veiculos = this.coletarDadosVeiculos();
+        
         const data = {
             numero: document.getElementById('numero').value,
             dataAbertura: document.getElementById('dataAbertura').value,
             cliente: document.getElementById('cliente').value,
-            veiculo: document.getElementById('veiculo').value,
+            veiculos: veiculos,
+            // Manter compatibilidade com sistema antigo
+            veiculo: veiculos.length > 0 ? veiculos[0].veiculo : '',
             observacoes: document.getElementById('observacoes').value,
             status: document.getElementById('status').value,
             servicos: [...this.servicosAdicionados],
@@ -612,8 +624,13 @@ const OrdemServico = {
         };
 
         // Validações
-        if (!data.cliente || !data.veiculo) {
-            Utils.showNotification('Por favor, selecione cliente e veículo!', 'error');
+        if (!data.cliente) {
+            Utils.showNotification('Por favor, preencha o nome do cliente!', 'error');
+            return;
+        }
+
+        if (veiculos.length === 0) {
+            Utils.showNotification('Adicione pelo menos um veículo!', 'error');
             return;
         }
 
@@ -708,9 +725,7 @@ const OrdemServico = {
                     <div class="detail-row">
                         <strong>Cliente:</strong> ${os.cliente}
                     </div>
-                    <div class="detail-row">
-                        <strong>Veículo:</strong> ${os.veiculo}
-                    </div>
+                    ${this.renderVeiculosView(os)}
                     <div class="detail-row">
                         <strong>Observações:</strong> ${os.observacoes || 'Nenhuma observação'}
                     </div>
@@ -773,6 +788,210 @@ const OrdemServico = {
             DataManager.update('ordens-servico', id, os);
             Utils.showNotification(`Status atualizado para: ${os.status}`, 'success');
             this.loadOrdemServicos();
+        }
+    },
+
+    // Métodos para múltiplos veículos
+    renderVeiculosEdit: function(veiculos = []) {
+        if (veiculos.length === 0) {
+            return this.criarVeiculoItem(0);
+        }
+        
+        return veiculos.map((veiculo, index) => this.criarVeiculoItem(index, veiculo)).join('');
+    },
+
+    criarVeiculoItem: function(index, veiculo = {}) {
+        return `
+            <div class="veiculo-item" data-index="${index}">
+                <div class="veiculo-header">
+                    <h5><i class="fas fa-car"></i> Veículo ${index + 1}</h5>
+                    ${index > 0 ? `<button type="button" class="btn-remove-veiculo" onclick="ordemServico.removerVeiculo(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>` : ''}
+                </div>
+                <div class="veiculo-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Modelo/Marca:</label>
+                            <input type="text" id="veiculo-${index}" name="veiculo" required 
+                                   value="${veiculo.veiculo || ''}" 
+                                   placeholder="Digite o modelo do veículo..." class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Placa:</label>
+                            <input type="text" id="placa-${index}" name="placa" 
+                                   value="${veiculo.placa || ''}" 
+                                   placeholder="ABC-1234" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Cor:</label>
+                            <input type="text" id="cor-${index}" name="cor" 
+                                   value="${veiculo.cor || ''}" 
+                                   placeholder="Cor do veículo" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Ano:</label>
+                            <input type="number" id="ano-${index}" name="ano" 
+                                   value="${veiculo.ano || ''}" 
+                                   placeholder="2023" min="1980" max="2030" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Quilometragem:</label>
+                            <input type="number" id="km-${index}" name="km" 
+                                   value="${veiculo.km || ''}" 
+                                   placeholder="Ex: 50000" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Combustível:</label>
+                            <select id="combustivel-${index}" name="combustivel" class="form-control">
+                                <option value="">Selecione...</option>
+                                <option value="Gasolina" ${veiculo.combustivel === 'Gasolina' ? 'selected' : ''}>Gasolina</option>
+                                <option value="Etanol" ${veiculo.combustivel === 'Etanol' ? 'selected' : ''}>Etanol</option>
+                                <option value="Flex" ${veiculo.combustivel === 'Flex' ? 'selected' : ''}>Flex</option>
+                                <option value="Diesel" ${veiculo.combustivel === 'Diesel' ? 'selected' : ''}>Diesel</option>
+                                <option value="GNV" ${veiculo.combustivel === 'GNV' ? 'selected' : ''}>GNV</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+
+    adicionarVeiculo: function() {
+        const container = document.getElementById('veiculos-container');
+        const currentItems = container.querySelectorAll('.veiculo-item');
+        const newIndex = currentItems.length;
+        
+        const newVeiculoHtml = this.criarVeiculoItem(newIndex);
+        container.insertAdjacentHTML('beforeend', newVeiculoHtml);
+        
+        // Setup autocomplete para os novos campos
+        this.setupFormAutocomplete();
+    },
+
+    removerVeiculo: function(index) {
+        const veiculoItem = document.querySelector(`.veiculo-item[data-index="${index}"]`);
+        if (veiculoItem) {
+            veiculoItem.remove();
+            this.reindexarVeiculos();
+        }
+    },
+
+    reindexarVeiculos: function() {
+        const veiculoItems = document.querySelectorAll('.veiculo-item');
+        veiculoItems.forEach((item, newIndex) => {
+            item.setAttribute('data-index', newIndex);
+            
+            // Atualizar header
+            const header = item.querySelector('h5');
+            header.innerHTML = `<i class="fas fa-car"></i> Veículo ${newIndex + 1}`;
+            
+            // Atualizar botão de remoção
+            const removeBtn = item.querySelector('.btn-remove-veiculo');
+            if (removeBtn) {
+                if (newIndex === 0) {
+                    removeBtn.remove();
+                } else {
+                    removeBtn.setAttribute('onclick', `ordemServico.removerVeiculo(${newIndex})`);
+                }
+            } else if (newIndex > 0) {
+                // Adicionar botão de remoção se não existir
+                const headerEl = item.querySelector('.veiculo-header');
+                headerEl.insertAdjacentHTML('beforeend', 
+                    `<button type="button" class="btn-remove-veiculo" onclick="ordemServico.removerVeiculo(${newIndex})">
+                        <i class="fas fa-times"></i>
+                    </button>`
+                );
+            }
+            
+            // Atualizar IDs dos campos
+            const inputs = item.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                const name = input.getAttribute('name');
+                if (name) {
+                    input.id = `${name}-${newIndex}`;
+                }
+            });
+        });
+    },
+
+    coletarDadosVeiculos: function() {
+        const veiculoItems = document.querySelectorAll('.veiculo-item');
+        const veiculos = [];
+        
+        veiculoItems.forEach((item, index) => {
+            const veiculo = {
+                veiculo: document.getElementById(`veiculo-${index}`)?.value || '',
+                placa: document.getElementById(`placa-${index}`)?.value || '',
+                cor: document.getElementById(`cor-${index}`)?.value || '',
+                ano: document.getElementById(`ano-${index}`)?.value || '',
+                km: document.getElementById(`km-${index}`)?.value || '',
+                combustivel: document.getElementById(`combustivel-${index}`)?.value || ''
+            };
+            
+            if (veiculo.veiculo) { // Só adiciona se tiver pelo menos o modelo
+                veiculos.push(veiculo);
+            }
+        });
+        
+        return veiculos;
+    },
+
+    renderVeiculosView: function(os) {
+        // Verificar se tem múltiplos veículos (novo formato) ou um único veículo (formato antigo)
+        if (os.veiculos && os.veiculos.length > 0) {
+            if (os.veiculos.length === 1) {
+                const veiculo = os.veiculos[0];
+                return `
+                    <div class="detail-row">
+                        <strong>Veículo:</strong> ${veiculo.veiculo}
+                        ${veiculo.placa ? ` (${veiculo.placa})` : ''}
+                        ${veiculo.cor ? ` - ${veiculo.cor}` : ''}
+                        ${veiculo.ano ? ` - ${veiculo.ano}` : ''}
+                        ${veiculo.km ? ` - ${Number(veiculo.km).toLocaleString()}km` : ''}
+                        ${veiculo.combustivel ? ` - ${veiculo.combustivel}` : ''}
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="detail-row">
+                        <strong>Veículos:</strong>
+                        <div class="veiculos-list">
+                            ${os.veiculos.map((veiculo, index) => `
+                                <div class="veiculo-item-view">
+                                    <span class="veiculo-numero">${index + 1}.</span>
+                                    <span class="veiculo-info">
+                                        ${veiculo.veiculo}
+                                        ${veiculo.placa ? ` (${veiculo.placa})` : ''}
+                                        ${veiculo.cor ? ` - ${veiculo.cor}` : ''}
+                                        ${veiculo.ano ? ` - ${veiculo.ano}` : ''}
+                                        ${veiculo.km ? ` - ${Number(veiculo.km).toLocaleString()}km` : ''}
+                                        ${veiculo.combustivel ? ` - ${veiculo.combustivel}` : ''}
+                                    </span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+        } else if (os.veiculo) {
+            // Formato antigo - compatibilidade
+            return `
+                <div class="detail-row">
+                    <strong>Veículo:</strong> ${os.veiculo}
+                </div>
+            `;
+        } else {
+            return `
+                <div class="detail-row">
+                    <strong>Veículo:</strong> Não informado
+                </div>
+            `;
         }
     }
 };
